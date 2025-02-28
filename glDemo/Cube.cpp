@@ -1,4 +1,4 @@
-#include "Cube.h"
+﻿#include "Cube.h"
 
 
 using namespace std;
@@ -10,29 +10,75 @@ using namespace glm;
 // Packed vertex buffer for cube
 static float positionArray[] = {
 
-	-1.0f, 1.0f, 1.0f, 1.0f,
-	-1.0f, 1.0f, -1.0f, 1.0f,
-	1.0f, 1.0f, -1.0f, 1.0f,
-	1.0f, 1.0f, 1.0f, 1.0f,
+	//top
+   -1.0f, 1.0f, 1.0f, 1.0f,    //top front left,0
+   -1.0f, 1.0f, -1.0f, 1.0f,   //top back left,1
+   1.0f, 1.0f, -1.0f, 1.0f,    //top back right,2
+   1.0f, 1.0f, 1.0f, 1.0f,     //top front right,3
 
-	-1.0f, -1.0f, 1.0f, 1.0f,
-	-1.0f, -1.0f, -1.0f, 1.0f,
-	1.0f, -1.0f, -1.0f, 1.0f,
-	1.0f, -1.0f, 1.0f, 1.0f
+   //bottom
+   -1.0f, -1.0f, 1.0f, 1.0f,    //bottom front left,4
+   -1.0f, -1.0f, -1.0f, 1.0f,   //bottom back left,5
+   1.0f, -1.0f, -1.0f, 1.0f,    //bottom back right,6
+   1.0f, -1.0f, 1.0f, 1.0f,     //bottom front right,7
+
+   //right
+   1.0f, 1.0f, -1.0f, 1.0f,    //top front right,8
+   1.0f, 1.0f, 1.0f, 1.0f,     //top back right,9
+   1.0f, -1.0f, -1.0f, 1.0f,   //bottom front right,10
+   1.0f, -1.0f, 1.0f, 1.0f,    //bottom back right,11
+
+   //left
+   -1.0f, 1.0f, 1.0f, 1.0f,    //top front left,12
+   -1.0f, 1.0f, -1.0f, 1.0f,   //top back left,13
+   -1.0f, -1.0f, 1.0f, 1.0f,   //bottom front left,14
+   -1.0f, -1.0f, -1.0f, 1.0f,  //bottom back left,15
+
+   //front
+   -1.0f, 1.0f, 1.0f, 1.0f,    //top front left,16
+   1.0f, 1.0f, 1.0f, 1.0f,        //top front right,17
+   -1.0f, -1.0f, 1.0f, 1.0f,   //bottom front left,18
+   1.0f, -1.0f, 1.0f, 1.0f,    //bottom front right,19
+
+   //back
+   -1.0f, 1.0f, -1.0f, 1.0f,    //top back left,20
+   1.0f, 1.0f, -1.0f, 1.0f,     //top back right,21
+   -1.0f, -1.0f, -1.0f, 1.0f,   //bottom back left,22
+   1.0f, -1.0f, -1.0f, 1.0f,    //bottom back right,23
 };
 
 // Packed colour buffer for principle axes model
 static float colourArray[] = {
 
 	1.0f, 0.0f, 0.0f, 1.0f,
-	1.0f, 0.0f, 1.0f, 1.0f,
+	1.0f, 0.0f, 0.0f, 1.0f,
+	1.0f, 0.0f, 0.0f, 1.0f,
+	1.0f, 0.0f, 0.0f, 1.0f,
+
 	0.0f, 1.0f, 0.0f, 1.0f,
+	0.0f, 1.0f, 0.0f, 1.0f,
+	0.0f, 1.0f, 0.0f, 1.0f,
+	0.0f, 1.0f, 0.0f, 1.0f,
+
+	1.0f, 0.0f, 1.0f, 1.0f,
+	1.0f, 0.0f, 1.0f, 1.0f,
+	1.0f, 0.0f, 1.0f, 1.0f,
+	1.0f, 0.0f, 1.0f, 1.0f,
+
 	1.0f, 1.0f, 0.0f, 1.0f,
+	1.0f, 1.0f, 0.0f, 1.0f,
+	1.0f, 1.0f, 0.0f, 1.0f,
+	1.0f, 1.0f, 0.0f, 1.0f,
+	
+	1.0f, 1.0f, 1.0f, 1.0f,
+	1.0f, 1.0f, 1.0f, 1.0f,
+	1.0f, 1.0f, 1.0f, 1.0f,
+	1.0f, 1.0f, 1.0f, 1.0f,
 
 	0.0f, 0.0f, 1.0f, 1.0f,
-	0.0f, 1.0f, 1.0f, 1.0f,
-	0.0f, 0.0f, 0.0f, 1.0f,
-	0.0f, 0.0f, 0.0f, 1.0f
+	0.0f, 0.0f, 1.0f, 1.0f,
+	0.0f, 0.0f, 1.0f, 1.0f,
+	0.0f, 0.0f, 1.0f, 1.0f
 };
 
 
@@ -48,20 +94,20 @@ static unsigned int indexArray[] = {
 	6, 7, 4,
 
 	// Right face
-	3, 7, 2, 
-	7, 6, 2,
+	11, 9, 8, 
+	10, 11, 8,
 
 	// Front face
-	0, 4, 3,
-	4, 7, 3,
+	13, 14, 12,
+	14, 15, 12,
 
 	// Left face
-	0, 1, 5,
-	4, 0, 5,
+	17, 18, 16,
+	18, 19, 16,
 	
 	// Back face
-	2, 6, 1,
-	6, 5, 1
+	22, 21, 23,
+	21, 20, 23
 };
 
 
