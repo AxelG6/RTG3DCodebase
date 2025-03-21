@@ -49,6 +49,7 @@ AIMesh* g_planetMesh = nullptr;
 int g_showing = 0;
 int g_NumExamples = 3;
 
+
 //Global Game Object
 Scene* g_Scene = nullptr;
 
@@ -56,6 +57,8 @@ Scene* g_Scene = nullptr;
 const unsigned int g_initWidth = 512;
 const unsigned int g_initHeight = 512;
 
+float windowHeight = 0;
+float windowWidth = 0;
 #pragma endregion
 
 
@@ -303,6 +306,7 @@ void renderScene()
 	}
 	case 2:
 		g_Scene->Render();
+
 	}
 
 }
@@ -319,7 +323,7 @@ void updateScene()
 		tDelta = (float)g_gameClock->gameTimeDelta();
 	}
 
-	g_Scene->Update(tDelta);
+	g_Scene->Update(tDelta,(windowWidth/windowHeight));
 }
 
 
@@ -336,6 +340,8 @@ void resizeWindow(GLFWwindow* _window, int _width, int _height)
 	}
 
 	glViewport(0, 0, _width, _height);		// Draw into entire window
+	windowWidth = _width;
+	windowHeight = _height;
 }
 
 
@@ -355,6 +361,10 @@ void keyboardHandler(GLFWwindow* _window, int _key, int _scancode, int _action, 
 			g_showing++;
 			g_showing = g_showing % g_NumExamples;
 
+			break;
+		case GLFW_KEY_Q:
+			g_Scene->Input();
+			break;
 		default:
 		{
 		}
