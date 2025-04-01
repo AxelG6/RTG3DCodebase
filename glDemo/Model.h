@@ -3,6 +3,7 @@
 
 using namespace std;
 
+class Plane;
 //base class for Models that can be owned by GameObjects so they can be rendered
 //current empty as this a interface/strawman to allow them to be put in the same data structure
 class Model

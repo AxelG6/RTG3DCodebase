@@ -9,6 +9,7 @@
 #include "AIMesh.h"
 #include "Cube.h"
 #include "Scene.h"
+#include "Plane.h"
 
 
 using namespace std;
@@ -49,10 +50,8 @@ AIMesh* g_planetMesh = nullptr;
 int g_showing = 0;
 int g_NumExamples = 3;
 
-
 //Global Game Object
 Scene* g_Scene = nullptr;
-
 // Window size
 const unsigned int g_initWidth = 512;
 const unsigned int g_initHeight = 512;
@@ -161,11 +160,13 @@ int main()
 	if (g_duckMesh) {
 		g_duckMesh->addTexture(string("Assets\\duck\\rubber_duck_toy_diff_4k.jpg"), FIF_JPEG);
 	}
+	
 	//
 	//Set up Scene class
 	//
 
 	g_Scene = new Scene();
+
 
 	ifstream manifest;
 	manifest.open("manifest.txt");
@@ -325,7 +326,59 @@ void updateScene()
 
 	g_Scene->Update(tDelta,(windowWidth/windowHeight));
 }
+vector<GLfloat> Plane(int div, float width)
+{
+	vector<GLfloat> plane;
 
+	float triangleSide = width / div;
+	for (int row=0; row < div+1;row++)
+	{
+		for (int col = 0; col < div + 1;col++)
+		{
+			vec3 crntVec = vec3(col * triangleSide, 0.0, row * -triangleSide);
+			plane.push_back(crntVec.x);
+			plane.push_back(crntVec.y);
+			plane.push_back(crntVec.z);
+		}
+	}
+	return plane;
+}
+
+vector<GLuint> PlaneIndex(int div)
+{
+	vector<GLuint> planeIndex;
+
+	for (int row = 0; row < div; row++)
+	{
+		for (int col = 0; col < div; col++)
+		{
+			int index = row * (div + 1) + col;
+			planeIndex.push_back(index);
+			planeIndex.push_back(index + (div + 1) + 1);
+			planeIndex.push_back(index + (div + 1));
+
+			planeIndex.push_back(index);
+			planeIndex.push_back(index + 1);
+			planeIndex.push_back(index + (div + 1) + 1);
+		}
+	}
+	return planeIndex;
+}
+
+vector<GLfloat> line(vec3 start, vec3 end, int div)
+{
+	vector<GLfloat> line;
+	vec3 diff = end - start;
+	vec3 step = vec3 (diff.x / div, diff.y/div,diff.z/div);
+	for (int i = 0; i < div + 1; i++)
+	{
+		vec3 crntVec = start + (step.x * i, step.y * i, step.z * i);
+		line.push_back(crntVec.x);
+		line.push_back(crntVec.y);
+		line.push_back(crntVec.z);
+	}
+	return line;
+}
 
 #pragma region Event handler functions
 //none of this is currently passed to the Game object
