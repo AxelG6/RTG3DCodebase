@@ -10,6 +10,7 @@
 #include "Cube.h"
 #include "Scene.h"
 #include "Plane.h"
+#include "Model.h"
 
 
 using namespace std;
@@ -29,6 +30,7 @@ double				g_prevMouseX, g_prevMouseY;
 ArcballCamera* g_mainCamera = nullptr;
 CGPrincipleAxes* g_principleAxes = nullptr;
 Cube* g_cube = nullptr;
+Plane* plane = nullptr;
 
 GLuint g_flatColourShader;
 
@@ -145,6 +147,7 @@ int main()
 	g_principleAxes = new CGPrincipleAxes();
 
 	g_cube = new Cube();
+	plane = new Plane();
 
 	g_creatureMesh = new AIMesh(string("Assets\\beast\\beast.obj"));
 	if (g_creatureMesh) {
@@ -302,7 +305,8 @@ void renderScene()
 		mat4 modelTransform = glm::translate(identity<mat4>(), vec3(2.0, 0.0, 2.0));
 		glUniformMatrix4fv(pLocation, 1, GL_FALSE, (GLfloat*)&modelTransform);
 
-		g_cube->render();
+		// g_cube->render();
+		plane->Render();
 		break;
 	}
 	case 2:
@@ -326,59 +330,7 @@ void updateScene()
 
 	g_Scene->Update(tDelta,(windowWidth/windowHeight));
 }
-vector<GLfloat> Plane(int div, float width)
-{
-	vector<GLfloat> plane;
 
-	float triangleSide = width / div;
-	for (int row=0; row < div+1;row++)
-	{
-		for (int col = 0; col < div + 1;col++)
-		{
-			vec3 crntVec = vec3(col * triangleSide, 0.0, row * -triangleSide);
-			plane.push_back(crntVec.x);
-			plane.push_back(crntVec.y);
-			plane.push_back(crntVec.z);
-		}
-	}
-	return plane;
-}
-
-vector<GLuint> PlaneIndex(int div)
-{
-	vector<GLuint> planeIndex;
-
-	for (int row = 0; row < div; row++)
-	{
-		for (int col = 0; col < div; col++)
-		{
-			int index = row * (div + 1) + col;
-			planeIndex.push_back(index);
-			planeIndex.push_back(index + (div + 1) + 1);
-			planeIndex.push_back(index + (div + 1));
-
-			planeIndex.push_back(index);
-			planeIndex.push_back(index + 1);
-			planeIndex.push_back(index + (div + 1) + 1);
-		}
-	}
-	return planeIndex;
-}
-
-vector<GLfloat> line(vec3 start, vec3 end, int div)
-{
-	vector<GLfloat> line;
-	vec3 diff = end - start;
-	vec3 step = vec3 (diff.x / div, diff.y/div,diff.z/div);
-	for (int i = 0; i < div + 1; i++)
-	{
-		vec3 crntVec = start + (step.x * i, step.y * i, step.z * i);
-		line.push_back(crntVec.x);
-		line.push_back(crntVec.y);
-		line.push_back(crntVec.z);
-	}
-	return line;
-}
 
 #pragma region Event handler functions
 //none of this is currently passed to the Game object

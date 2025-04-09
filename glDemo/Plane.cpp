@@ -110,8 +110,6 @@ static unsigned int indexArray[] = {
 
 Plane::Plane()
 {
-	PlaneGen(10, 10);
-
 	m_numFaces = 6 * 2;
 
 	glGenVertexArrays(1, &m_vao);
@@ -191,8 +189,8 @@ vector<GLuint> Plane::PlaneIndex(int div)
 
 void Plane::Render() {
 
-	glBindVertexArray(m_planeIndex);
-	glDrawElements(GL_LINES, v_planeIndex.size() * 3, GL_UNSIGNED_INT, (const GLvoid*)0);
+	glBindVertexArray(m_vao);
+	glDrawElements(GL_TRIANGLES, m_numFaces * 3, GL_UNSIGNED_INT, (const GLvoid*)0);
 }
 
 vector<GLfloat>Plane::lines(vec3 start, vec3 end, int div)
