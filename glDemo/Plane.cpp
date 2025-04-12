@@ -40,10 +40,10 @@ static float positionArray[] = {
 	-1.0f, 1.0f, -1.0f, 1.0f, //top, back, left, 20
 	1.0f, 1.0f, -1.0f, 1.0f, //top, back, right 21
 	-1.0f, -1.0f, -1.0f, 1.0f,//bottom back left 22
-	1.0f, -1.0f, -1.0f, 1.0f //bottom back right 23
-
+	1.0f, -1.0f, -1.0f, 1.0f,//bottom back right 23
 };
 
+std::vector<float> procedArray;
 // Packed colour buffer for principle axes model
 static float colourArray[] = {
 
@@ -108,31 +108,35 @@ static unsigned int indexArray[] = {
 	21, 23, 22
 };
 
+std::vector<unsigned int> procIndexArray;
+
 Plane::Plane()
 {
-	m_numFaces = 6 * 2;
+	m_numFaces = 6* 2;
 
+	PlaneGen(3, 3);
+	PlaneIndex(3);
 	glGenVertexArrays(1, &m_vao);
 	glBindVertexArray(m_vao);
 
 	// setup vbo for position attribute
 	glGenBuffers(1, &m_vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(positionArray), positionArray, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(procedArray), procedArray.data(), GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)0);
 	glEnableVertexAttribArray(0);
 
 	// setup vbo for colour attribute
-	glGenBuffers(1, &m_colourBuffer);
+	/*glGenBuffers(1, &m_colourBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, m_colourBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(positionArray), colourArray, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(procedArray), colourArray, GL_STATIC_DRAW);
 	glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)0);
-	glEnableVertexAttribArray(4);
+	glEnableVertexAttribArray(4);*/
 
 	// setup vbo for cube) index buffer
 	glGenBuffers(1, &m_indexBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indexArray), indexArray, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(procIndexArray), procIndexArray.data(), GL_STATIC_DRAW);
 
 	glBindVertexArray(0);
 }
@@ -148,26 +152,31 @@ Plane::~Plane()
 
 }
 
-vector<GLfloat> Plane::PlaneGen(int div, float width)
+void Plane::PlaneGen(int div, float width)
 {
+	float x = 0.0f;
+	float y = 0.0f;
+	float z = 0.0f;
+	float w = 1.0f;
 
-	vector<GLfloat> plane;
-
-	float triangleSide = width / div;
-	for (int row = 0; row < div + 1; row++)
+	for (int i = 0; i <= width; i++)
 	{
-		for (int col = 0; col < div + 1; col++)
-		{
-			vec3 crntVec = vec3(col * triangleSide, 0.0, row * -triangleSide);
-			plane.push_back(crntVec.x);
-			plane.push_back(crntVec.y);
-			plane.push_back(crntVec.z);
-		}
+		
+		for (int j = 0; j <= div; j++)
+			{
+				procedArray.push_back(x);
+				procedArray.push_back(y);
+				procedArray.push_back(z);
+				procedArray.push_back(w);
+				x += 0.5f;
+			}
+		z += 0.5;
+		x = 0.0f;
 	}
-	return plane;
+	
 }
 
-vector<GLuint> Plane::PlaneIndex(int div)
+void Plane::PlaneIndex(int div)
 {
 
 	for (int row = 0; row < div; row++)
@@ -175,16 +184,18 @@ vector<GLuint> Plane::PlaneIndex(int div)
 		for (int col = 0; col < div; col++)
 		{
 			int index = row * (div + 1) + col;
-			v_planeIndex.push_back(index);
-			v_planeIndex.push_back(index + (div + 1) + 1);
-			v_planeIndex.push_back(index + (div + 1));
+			procIndexArray.push_back(index + (div + 1) + 1);//5
+			procIndexArray.push_back(index + 1);//1
+			procIndexArray.push_back(index);//0
+			
+			procIndexArray.push_back(index + (div + 1) + 1);//5
+			procIndexArray.push_back(index + (div + 1));//4
+			procIndexArray.push_back(index); //0
+			
+		
 
-			v_planeIndex.push_back(index);
-			v_planeIndex.push_back(index + 1);
-			v_planeIndex.push_back(index + (div + 1) + 1);
 		}
 	}
-	return v_planeIndex;
 }
 
 void Plane::Render() {
@@ -193,35 +204,4 @@ void Plane::Render() {
 	glDrawElements(GL_TRIANGLES, m_numFaces * 3, GL_UNSIGNED_INT, (const GLvoid*)0);
 }
 
-vector<GLfloat>Plane::lines(vec3 start, vec3 end, int div)
-{
-	vec3 diff = end - start;
-	vec3 step = vec3(diff.x / div, diff.y / div, diff.z / div);
-	for (int i = 0; i < div + 1; i++)
-	{
-		vec3 crntVec = start + (step.x * i, step.y * i, step.z * i);
-		line.push_back(crntVec.x);
-		line.push_back(crntVec.y);
-		line.push_back(crntVec.z);
-	}
-	return line;
-}
 
-vector<GLfloat>Plane::planeVertices(vec3 v0, vec3 v1, vec3 v2, vec3 v3, int div)
-{
-	vector<GLfloat> plane;
-	vec3 vec03 = vec3 ((v3 - v0).x / div, (v3 - v0).y / div, (v3 - v0).z / div);
-	vec3 vec12 = vec3 ((v2 - v1).x / div, (v2 - v1).y / div, (v2 - v1).z / div);
-
-	for (int row = 0; row < div + 1; row++)
-	{
-		vec3 start = v0 + vec3((vec03.x * row), (vec03.y * row), (vec03.z * row));
-		vec3 end = v1 + vec3((vec12.x * row), (vec12.y * row), (vec12.z * row));
-
-		vector<GLfloat> rowVertices =  lines(start, end, div);
-
-		plane.insert(plane.end(),rowVertices.begin(),rowVertices.end());
-		
-	}
-	return plane;
-}
