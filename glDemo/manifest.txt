@@ -126,7 +126,8 @@ TYPE: FIF_JPEG
 NAME: DUCK
 FILE: Assets\\duck\\rubber_duck_toy_diff_4k.jpg
 }
-SHADERS 2
+
+SHADERS 3
 {
 NAME: FLAT
 VERTFILE: Assets\\Shaders\\flatColour.vert
@@ -136,6 +137,11 @@ FRAGFILE: Assets\\Shaders\\flatColour.frag
 NAME: TEXDIR
 VERTFILE: Assets\\Shaders\\texture-directional.vert
 FRAGFILE: Assets\\Shaders\\texture-directional.frag
+}
+{
+NAME: WAVE
+VERTFILE:Assets\\Shaders\\waveMotion.vert
+FRAGFILE: Assets\\Shaders\\waveMotion.frag
 }
 
 GAMEOBJECTS 4
@@ -170,7 +176,7 @@ SCALE: 4.0 4.0 4.0
 ROTINC: 0.0 0.2 0.0
 MODEL: DUCK
 TEXTURE: DUCK
-SHADER: TEXDIR
+SHADER: WAVE
 }
 {
 TYPE: EXAMPLE
