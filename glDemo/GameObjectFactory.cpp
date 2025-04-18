@@ -1,6 +1,7 @@
 #include "GameObjectFactory.h"
 #include "GameObject.h"
 #include "ExampleGO.h"
+
 #include <assert.h>
 
 using std::string;
@@ -16,6 +17,7 @@ GameObject* GameObjectFactory::makeNewGO(string _type)
 	{
 		return new ExampleGO();
 	}
+	
 	else
 	{
 		printf("UNKNOWN GAME OBJECT TYPE: %s \n", _type.c_str());

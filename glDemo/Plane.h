@@ -22,7 +22,7 @@ private:
 	GLuint	m_vao = 0;
 
 	int div;
-
+	float width;
 	GLuint				m_vertexBuffer;
 	GLuint				m_colourBuffer;
 	GLuint				m_indexBuffer;

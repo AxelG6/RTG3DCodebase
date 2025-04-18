@@ -108,35 +108,38 @@ static unsigned int indexArray[] = {
 	21, 23, 22
 };
 
-std::vector<unsigned int> procIndexArray;
+std::vector<GLuint> procIndexArray;
 
 Plane::Plane()
 {
-	m_numFaces = 6* 2;
-
-	PlaneGen(3, 3);
-	PlaneIndex(3);
+	
+	div = 2;
+	width = 2;
+	m_numFaces = div*width * 2;
+	PlaneGen(div, width);
+	PlaneIndex(div);
+	
 	glGenVertexArrays(1, &m_vao);
 	glBindVertexArray(m_vao);
 
 	// setup vbo for position attribute
 	glGenBuffers(1, &m_vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(procedArray), procedArray.data(), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, procedArray.size() * sizeof(float), procedArray.data(), GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)0);
 	glEnableVertexAttribArray(0);
 
-	// setup vbo for colour attribute
-	/*glGenBuffers(1, &m_colourBuffer);
+	 //setup vbo for colour attribute
+	glGenBuffers(1, &m_colourBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, m_colourBuffer);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(procedArray), colourArray, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, procedArray.size() * sizeof(float), colourArray, GL_STATIC_DRAW);
 	glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)0);
-	glEnableVertexAttribArray(4);*/
+	glEnableVertexAttribArray(4);
 
 	// setup vbo for cube) index buffer
 	glGenBuffers(1, &m_indexBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(procIndexArray), procIndexArray.data(), GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, procIndexArray.size() * sizeof(GLuint), procIndexArray.data(), GL_STATIC_DRAW);
 
 	glBindVertexArray(0);
 }
@@ -168,9 +171,9 @@ void Plane::PlaneGen(int div, float width)
 				procedArray.push_back(y);
 				procedArray.push_back(z);
 				procedArray.push_back(w);
-				x += 0.5f;
+				x += 1.0f;
 			}
-		z += 0.5;
+		z += 1.0;
 		x = 0.0f;
 	}
 	
@@ -184,16 +187,15 @@ void Plane::PlaneIndex(int div)
 		for (int col = 0; col < div; col++)
 		{
 			int index = row * (div + 1) + col;
-			procIndexArray.push_back(index + (div + 1) + 1);//5
+			procIndexArray.push_back(index + (div + 1));//2
 			procIndexArray.push_back(index + 1);//1
 			procIndexArray.push_back(index);//0
 			
-			procIndexArray.push_back(index + (div + 1) + 1);//5
-			procIndexArray.push_back(index + (div + 1));//4
-			procIndexArray.push_back(index); //0
+			procIndexArray.push_back(index + 1);
+			procIndexArray.push_back(index + (div + 1));
+			procIndexArray.push_back(index + (div + 1) + 1);//3
 			
-		
-
+			
 		}
 	}
 }
