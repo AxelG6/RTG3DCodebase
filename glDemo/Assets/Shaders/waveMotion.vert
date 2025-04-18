@@ -13,7 +13,7 @@ out vec2 vTexCoord;
 void main()
 {
     vec3 pos = aPos;
-
+    uTime= glfwGetTime();
     // Displace the y-position using a sine wave
     pos.y += sin(pos.x * uWaveFrequency + uTime * uWaveSpeed) * uWaveStrength;
 

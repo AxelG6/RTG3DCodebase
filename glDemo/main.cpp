@@ -35,6 +35,7 @@ Plane* plane = nullptr;
 GLuint g_flatColourShader;
 
 GLuint g_texDirLightShader;
+
 vec3 g_DLdirection = vec3(0.0f, 1.0f, 0.0f);
 vec3 g_DLcolour = vec3(1.0f, 1.0f, 1.0f);
 vec3 g_DLambient = vec3(0.2f, 0.2f, 0.2f);

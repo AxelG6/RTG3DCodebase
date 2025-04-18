@@ -140,7 +140,7 @@ FRAGFILE: Assets\\Shaders\\texture-directional.frag
 }
 {
 NAME: WAVE
-VERTFILE:Assets\\Shaders\\waveMotion.vert
+VERTFILE: Assets\\Shaders\\waveMotion.vert
 FRAGFILE: Assets\\Shaders\\waveMotion.frag
 }
 
