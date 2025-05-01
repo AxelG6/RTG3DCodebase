@@ -236,7 +236,7 @@ void renderScene()
 		mat4 modelTransform = identity<mat4>();
 		glUniformMatrix4fv(pLocation, 1, GL_FALSE, (GLfloat*)&modelTransform);
 
-		g_principleAxes->render();
+		//g_principleAxes->render();
 	}
 
 	switch (g_showing)

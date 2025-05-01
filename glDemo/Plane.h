@@ -22,8 +22,8 @@ private:
 	GLuint	m_numFaces = 0;
 	GLuint	m_vao = 0;
 
-	float div;
-	float width;
+	float div=4;
+	float width=4;
 	GLuint				m_vertexBuffer;
 	GLuint				m_colourBuffer;
 	GLuint				m_indexBuffer;

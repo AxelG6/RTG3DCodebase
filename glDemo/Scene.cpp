@@ -133,7 +133,6 @@ Shader* Scene::GetShader(string _shaderName)
 	return nullptr;
 }
 
-
 //Render Everything
 void Scene::Render()
 {
@@ -315,7 +314,7 @@ void Scene::Init()
 	int count = 0;
 	for (list<Camera*>::iterator it = m_Cameras.begin(); it != m_Cameras.end(); ++it)
 	{
-		(*it)->Init(100, 100, this);// TODO: set correct screen sizes here
+		(*it)->Init(1048, 1048, this);// TODO: set correct screen sizes here
 
 		//if a camera is called MAIN
 		//this will be the starting camera used
@@ -340,7 +339,7 @@ void Scene::Init()
 		(*it)->Init(this);
 	}
 }
-
+//change name
 void Scene::Input()
 {
 	m_useCameraIndex++;

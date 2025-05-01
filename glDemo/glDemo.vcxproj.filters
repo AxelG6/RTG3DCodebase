@@ -120,6 +120,9 @@
     <ClInclude Include="Plane.h">
       <Filter>Scene Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="orthoCamera.h">
+      <Filter>Scene Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -192,6 +195,9 @@
       <Filter>Scene Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Plane.cpp">
+      <Filter>Scene Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="orthoCamera.cpp">
       <Filter>Scene Source Files</Filter>
     </ClCompile>
   </ItemGroup>
