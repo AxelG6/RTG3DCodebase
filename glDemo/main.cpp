@@ -311,6 +311,7 @@ void renderScene()
 		break;
 	}
 	case 2:
+
 		g_Scene->Render();
 
 	}

@@ -1,5 +1,5 @@
 #include "Plane.h"
-
+#include "stringHelp.h"
 using namespace std;
 using namespace glm;
 
@@ -43,9 +43,7 @@ std::vector<GLuint> procIndexArray;
 
 Plane::Plane()
 {
-	
-	div = 2;
-	width = 2;
+
 	m_numFaces = div*width * 2;
 	PlaneGen(div, width);
 	PlaneIndex(div);
@@ -113,7 +111,7 @@ void Plane::PlaneGen(int div, float width)
 void Plane::PlaneIndex(int div)
 {
 
-	for (int row = 0; row < div; row++)
+	for (int row = 0; row < width; row++)
 	{
 		for (int col = 0; col < div; col++)
 		{
@@ -137,4 +135,9 @@ void Plane::Render() {
 	glDrawElements(GL_TRIANGLES, m_numFaces * 3, GL_UNSIGNED_INT, (const GLvoid*)0);
 }
 
-
+void Plane::Load(ifstream& _file)
+{
+	StringHelp::String(_file, "NAME", m_name);
+	StringHelp::Float(_file, "DIV", div);
+	StringHelp::Float(_file, "WIDTH", width);
+}

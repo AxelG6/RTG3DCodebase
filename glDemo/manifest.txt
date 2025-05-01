@@ -93,6 +93,8 @@ FILE: Assets\\duck\\rubber_duck_toy_4k.obj
 {
 TYPE: PLANE
 NAME: PLANE
+DIV: 10
+WIDTH: 10
 }
 
 TEXTURES 6

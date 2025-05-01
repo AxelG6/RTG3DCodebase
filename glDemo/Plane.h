@@ -15,13 +15,14 @@ public:
 	
 	
 	void Render();
+	void Load(ifstream& _file);
 
 private:
 	
 	GLuint	m_numFaces = 0;
 	GLuint	m_vao = 0;
 
-	int div;
+	float div;
 	float width;
 	GLuint				m_vertexBuffer;
 	GLuint				m_colourBuffer;
