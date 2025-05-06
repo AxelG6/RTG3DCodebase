@@ -48,6 +48,9 @@ public:
 	void Init();
 	void Input();
 
+	void mouseMoveHandlerC(GLFWwindow* _window, double _xpos, double _ypos);
+	void mouseScrollHandlerC(GLFWwindow* _window, double _xoffset, double _yoffset);
+
 protected:
 
 	//data structures containing pointers to all our stuff
@@ -57,6 +60,9 @@ protected:
 	int m_numModels = 0;
 	int m_numTextures = 0;
 	int m_numShaders = 0;
+	double g_prevMouseX;
+	double g_prevMouseY;
+
 	std::list<Camera*>    m_Cameras;
 	std::list<Light*>    m_Lights;
 	std::list<Model*>		m_Models;

@@ -398,10 +398,8 @@ void mouseMoveHandler(GLFWwindow* _window, double _xpos, double _ypos)
 
 		float dx = float(_xpos - g_prevMouseX);// *360.0f * tDelta;
 		float dy = float(_ypos - g_prevMouseY);// *360.0f * tDelta;
-
-		if (g_mainCamera)
-			g_mainCamera->rotateCamera(-dy, -dx);
-
+		
+		g_Scene->mouseMoveHandlerC(_window, dx, dy);
 		g_prevMouseX = _xpos;
 		g_prevMouseY = _ypos;
 	}
@@ -425,13 +423,9 @@ void mouseButtonHandler(GLFWwindow* _window, int _button, int _action, int _mods
 
 void mouseScrollHandler(GLFWwindow* _window, double _xoffset, double _yoffset) {
 
-	if (g_mainCamera) 
-	{
-		if (_yoffset < 0.0)
-			g_mainCamera->scaleRadius(1.1f);
-		else if (_yoffset > 0.0)
-			g_mainCamera->scaleRadius(0.9f);
-	}
+	
+		g_Scene->mouseScrollHandlerC(_window, _xoffset, _yoffset);
+	
 }
 
 void mouseEnterHandler(GLFWwindow* _window, int _entered) 

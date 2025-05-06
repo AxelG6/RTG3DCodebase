@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "CameraFactory.h"
 #include "Camera.h"
+#include "orthoCamera.h"
 #include "LightFactory.h"
 #include "Light.h"
 #include "ModelFactory.h"
@@ -339,6 +340,8 @@ void Scene::Init()
 		(*it)->Init(this);
 	}
 }
+
+
 //change name
 void Scene::Input()
 {
@@ -348,4 +351,37 @@ void Scene::Input()
 	auto it = m_Cameras.begin();
 	std::advance(it, m_useCameraIndex);
 	m_useCamera = (*it);
+}
+
+
+void Scene::mouseMoveHandlerC(GLFWwindow* _window, double _xpos, double _ypos)
+{
+
+		//float tDelta = gameClock->gameTimeDelta();
+
+		float dx = float(_xpos - g_prevMouseX);// *360.0f * tDelta;
+		float dy = float(_ypos - g_prevMouseY);// *360.0f * tDelta;
+
+		if (m_useCamera)
+			m_useCamera->rotateCamera(-dy, -dx);
+
+		g_prevMouseX = _xpos;
+		g_prevMouseY = _ypos;
+	
+}
+
+
+void Scene::mouseScrollHandlerC(GLFWwindow* _window, double _xoffset, double _yoffset) {
+
+	if (m_useCamera)
+	{
+		if (_yoffset < 0.0)
+			m_useCamera->scaleRadius(1.1f);
+		else if (_yoffset > 0.0)
+			m_useCamera->scaleRadius(0.9f);
+	}
+}
+
+void mouseEnterHandlerC(GLFWwindow* _window, int _entered)
+{
 }
