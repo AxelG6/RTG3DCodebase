@@ -145,9 +145,13 @@ void Scene::Render()
 		if ((*it)->GetRP() & RP_OPAQUE)// TODO: note the bit-wise operation. Why?
 		{
 			//set shader program using
+			
 			GLuint SP = (*it)->GetShaderProg();
+			GLint timeLocation = glGetUniformLocation(SP, "time");
+			float currentTime = (float)glfwGetTime(); // or use SDL_GetTicks() / 1000.0f for SDL
 			glUseProgram(SP);
-
+			glUniform1f(timeLocation, currentTime);
+			
 			//set up for uniform shader values for current camera
 			m_useCamera->SetRenderValues(SP);
 
