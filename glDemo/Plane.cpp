@@ -3,71 +3,12 @@
 using namespace std;
 using namespace glm;
 
-
 std::vector<float> procedArray;
-// Packed colour buffer for principle axes model
-static float colourArray[] = {
-
-	1.0f, 0.0f, 0.0f, 1.0f,
-	1.0f, 0.0f, 0.0f, 1.0f,
-	1.0f, 0.0f, 0.0f, 1.0f,
-	1.0f, 0.0f, 0.0f, 1.0f,
-
-	0.0f, 1.0f, 0.0f, 1.0f,
-	0.0f, 1.0f, 0.0f, 1.0f,
-	0.0f, 1.0f, 0.0f, 1.0f,
-	0.0f, 1.0f, 0.0f, 1.0f,
-
-	0.0f, 0.0f, 1.0f, 1.0f,
-	0.0f, 0.0f, 1.0f, 1.0f,
-	0.0f, 0.0f, 1.0f, 1.0f,
-	0.0f, 0.0f, 1.0f, 1.0f,
-
-	1.0f, 1.0f, 0.0f, 1.0f,
-	1.0f, 1.0f, 0.0f, 1.0f,
-	1.0f, 1.0f, 0.0f, 1.0f,
-	1.0f, 1.0f, 0.0f, 1.0f,
-
-	0.0f, 1.0f, 1.0f, 1.0f,
-	0.0f, 1.0f, 1.0f, 1.0f,
-	0.0f, 1.0f, 1.0f, 1.0f,
-	0.0f, 1.0f, 1.0f, 1.0f,
-
-	1.0f, 0.0f, 1.0f, 1.0f,
-	1.0f, 0.0f, 1.0f, 1.0f,
-	1.0f, 0.0f, 1.0f, 1.0f,
-	1.0f, 0.0f, 1.0f, 1.0f
-};
 
 std::vector<GLuint> procIndexArray;
 
 Plane::Plane()
 {
-
-	
-	glGenVertexArrays(1, &m_vao);
-	glBindVertexArray(m_vao);
-
-	// setup vbo for position attribute
-	glGenBuffers(1, &m_vertexBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, procedArray.size() * sizeof(float), procedArray.data(), GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)0);
-	glEnableVertexAttribArray(0);
-
-	 //setup vbo for colour attribute
-	glGenBuffers(1, &m_colourBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, m_colourBuffer);
-	glBufferData(GL_ARRAY_BUFFER, procedArray.size() * sizeof(float), colourArray, GL_STATIC_DRAW);
-	glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)0);
-	glEnableVertexAttribArray(4);
-
-	// setup vbo for cube) index buffer
-	glGenBuffers(1, &m_indexBuffer);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, procIndexArray.size() * sizeof(GLuint), procIndexArray.data(), GL_STATIC_DRAW);
-
-	glBindVertexArray(0);
 }
 
 Plane::~Plane()
@@ -149,13 +90,6 @@ void Plane::Load(ifstream& _file)
 	glBufferData(GL_ARRAY_BUFFER, procedArray.size() * sizeof(float), procedArray.data(), GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)0);
 	glEnableVertexAttribArray(0);
-
-	//setup vbo for colour attribute
-	glGenBuffers(1, &m_colourBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, m_colourBuffer);
-	glBufferData(GL_ARRAY_BUFFER, procedArray.size() * sizeof(float), colourArray, GL_STATIC_DRAW);
-	glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)0);
-	glEnableVertexAttribArray(4);
 
 	// setup vbo for cube) index buffer
 	glGenBuffers(1, &m_indexBuffer);
