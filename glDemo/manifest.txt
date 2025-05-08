@@ -93,8 +93,8 @@ FILE: Assets\\duck\\rubber_duck_toy_4k.obj
 {
 TYPE: PLANE
 NAME: PLANE
-DIV: 10
-WIDTH: 10
+DIV: 3.0
+WIDTH: 1.0
 }
 
 TEXTURES 6
@@ -146,11 +146,22 @@ VERTFILE: Assets\\Shaders\\waveMotion.vert
 FRAGFILE: Assets\\Shaders\\waveMotion.frag
 }
 
-GAMEOBJECTS 1
+GAMEOBJECTS 2
 {
 TYPE: EXAMPLE
-NAME: PLANE
+NAME: PLANE1
 POS: 0.0 0.0 0.0
+ROT: 0.0 0.0 0.0
+SCALE: 0.5 0.5 0.5
+ROTINC: 0.0 0.0 0.0
+MODEL: PLANE
+TEXTURE: DUCK
+SHADER: WAVE
+}
+{
+TYPE: EXAMPLE
+NAME: PLANE2
+POS: 1.0 0.0 1.0
 ROT: 0.0 0.0 0.0
 SCALE: 0.5 0.5 0.5
 ROTINC: 0.0 0.0 0.0
