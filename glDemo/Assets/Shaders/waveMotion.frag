@@ -27,8 +27,8 @@ void main() {
     vec3 diffuse = diff * baseColor;
 
     // Optional: use texture instead of base color
-    // vec3 texColor = texture(diffuseMap, inputFragment.texCoord).rgb;
-    // vec3 finalColor = ambient + diff * texColor;
+    //vec3 texColor = texture(diffuseMap, inputFragment.texCoord).rgb;
+    //vec3 finalColor = ambient + diff * texColor;
 
     vec3 finalColor = ambient + diffuse;
     fragColor = vec4(finalColor, 1.0);

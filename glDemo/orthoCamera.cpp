@@ -29,8 +29,6 @@ void OrthoCamera::calculateDerivedValues() {
 // Public method implementation
 //
 
-// ArcballCamera constructors
-
 // initialise camera parameters so it is placed at the origin looking down the -z axis (for a right-handed camera) or +z axis (for a left-handed camera)
 OrthoCamera::OrthoCamera() {
 

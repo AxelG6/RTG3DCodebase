@@ -48,8 +48,8 @@ public:
 	void Init();
 	void Input();
 
-	void mouseMoveHandlerC(GLFWwindow* _window, double _xpos, double _ypos);
-	void mouseScrollHandlerC(GLFWwindow* _window, double _xoffset, double _yoffset);
+	void mouseMoveHandlerC(double _xpos, double _ypos);
+	void mouseScrollHandlerC(double _xoffset, double _yoffset);
 
 protected:
 

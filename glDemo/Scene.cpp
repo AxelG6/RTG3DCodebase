@@ -7,6 +7,7 @@
 #include "Light.h"
 #include "ModelFactory.h"
 #include "model.h"
+#include "helper.h"
 #include "Texture.h"
 #include "Shader.h"
 #include "GameObjectFactory.h"
@@ -145,8 +146,8 @@ void Scene::Render()
 		if ((*it)->GetRP() & RP_OPAQUE)// TODO: note the bit-wise operation. Why?
 		{
 			//set shader program using
-			
 			GLuint SP = (*it)->GetShaderProg();
+
 			GLint timeLocation = glGetUniformLocation(SP, "time");
 			float currentTime = (float)glfwGetTime(); // or use SDL_GetTicks() / 1000.0f for SDL
 			glUseProgram(SP);
@@ -154,9 +155,10 @@ void Scene::Render()
 			
 			//set up for uniform shader values for current camera
 			m_useCamera->SetRenderValues(SP);
-
-			//loop through setting up uniform shader values for anything else
 			SetShaderUniforms(SP);
+			
+			//loop through setting up uniform shader values for anything else
+			
 
 			//set any uniform shader values for the actual model
 			(*it)->PreRender();
@@ -358,24 +360,15 @@ void Scene::Input()
 }
 
 
-void Scene::mouseMoveHandlerC(GLFWwindow* _window, double _xpos, double _ypos)
+void Scene::mouseMoveHandlerC(double _xpos, double _ypos)
 {
 
-		//float tDelta = gameClock->gameTimeDelta();
-
-		float dx = float(_xpos - g_prevMouseX);// *360.0f * tDelta;
-		float dy = float(_ypos - g_prevMouseY);// *360.0f * tDelta;
-
 		if (m_useCamera)
-			m_useCamera->rotateCamera(-dy, -dx);
-
-		g_prevMouseX = _xpos;
-		g_prevMouseY = _ypos;
-	
+			m_useCamera->rotateCamera(_xpos,_ypos);
 }
 
 
-void Scene::mouseScrollHandlerC(GLFWwindow* _window, double _xoffset, double _yoffset) {
+void Scene::mouseScrollHandlerC(double _xoffset, double _yoffset) {
 
 	if (m_useCamera)
 	{

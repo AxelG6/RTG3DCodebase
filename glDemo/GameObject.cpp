@@ -45,6 +45,7 @@ void GameObject::PreRender()
 
 void GameObject::Render()
 {
+
 	//I have nothing to draw
 }
 
