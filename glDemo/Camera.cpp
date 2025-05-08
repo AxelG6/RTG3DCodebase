@@ -163,13 +163,6 @@ void Camera::calculateDerivedValues() {
 
 	const float theta_ = glm::radians<float>(m_theta);
 	const float phi_ = glm::radians<float>(m_phi);
-
-	// calculate position vector
-	//cameraPos = glm::vec4(sinf(phi_) * cosf(-theta_) * radius, sinf(-theta_) * radius, cosf(phi_) * cosf(-theta_) * radius, 1.0f);
-
-	// calculate orientation basis R
-	//R = glm::eulerAngleY(phi_) * glm::eulerAngleX(theta_);
-
 	// calculate view and projection transform matrices
 	m_viewMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -m_radius)) * glm::eulerAngleX(-theta_) * glm::eulerAngleY(-phi_);
 	m_projectionMatrix = glm::perspective(glm::radians<float>(m_fovY), m_aspect, m_nearPlane, m_farPlane);
@@ -178,18 +171,6 @@ void Camera::calculateDerivedValues() {
 
 
 #pragma region Accessor methods for derived values
-
-// return the camera location in world coordinate space
-//glm::vec4 ArcballCamera::getPosition() {
-//
-//	return cameraPos;
-//}
-
-// return a const reference to the camera's orientation matrix in world coordinate space
-//glm::mat4 ArcballCamera::getOrientationBasis() {
-//
-//	return R;
-//}
 
 // return a const reference to the view transform matrix for the camera
 glm::mat4 Camera::viewTransform() {

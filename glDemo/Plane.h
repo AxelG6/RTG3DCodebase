@@ -25,7 +25,6 @@ private:
 	float div;
 	float width;
 	GLuint				m_vertexBuffer;
-	GLuint				m_colourBuffer;
 	GLuint				m_indexBuffer;
 
 	vector<GLfloat> procedArray;

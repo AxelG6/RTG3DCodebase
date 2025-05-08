@@ -9,6 +9,13 @@ std::vector<GLuint> procIndexArray;
 
 Plane::Plane()
 {
+	m_type = "PLANE";
+	m_numFaces = 0;
+	m_vao = 0;
+	div = 0.0f;
+	width = 0.0f;
+	m_vertexBuffer = 0;
+	m_indexBuffer = 0;
 }
 
 Plane::~Plane()
@@ -17,7 +24,6 @@ Plane::~Plane()
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 	glDeleteBuffers(1, &m_vertexBuffer);
-	glDeleteBuffers(1, &m_colourBuffer);
 	glDeleteBuffers(1, &m_indexBuffer);
 
 }
@@ -38,9 +44,9 @@ void Plane::PlaneGen(int div, float width)
 				procedArray.push_back(y);
 				procedArray.push_back(z);
 				procedArray.push_back(w);
-				x += 1.0f;
+				x += 0.05f;
 			}
-		z += 1.0;
+		z += 0.05;
 		x = 0.0f;
 	}
 	
