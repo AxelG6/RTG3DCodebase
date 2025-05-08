@@ -1,7 +1,7 @@
 #version 450 core
 
 // Texture sampler (for diffuse surface color)
-layout(binding = 0) uniform sampler2D texture;
+layout(binding = 0) uniform sampler2D texSampler;
 
 // Directional light attributes
 uniform vec3 DIRDir; // Light direction
@@ -27,7 +27,7 @@ void main(void) {
   float l = max(dot(N, L), 0.0); // Ensure non-negative lighting
   
   // Sample texture color
-  vec4 surfaceColour = texture(texture, inputFragment.texCoord);
+  vec4 surfaceColour = texture(texSampler, inputFragment.texCoord);
   
   // Calculate diffuse color
   vec3 diffuseColour = surfaceColour.rgb * DIRCol * l;

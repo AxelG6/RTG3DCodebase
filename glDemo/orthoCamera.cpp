@@ -42,13 +42,12 @@ void OrthographicCamera::Tick(float _dt, float aspectRatio) {
     m_projectionMatrix = glm::ortho(m_left, m_right, m_bottom, m_top, m_nearPlane, m_farPlane);
     float aspect_ratio = aspectRatio;
     // Update the view matrix	float aspect_ratio = aspectRatio;
-    const float theta_ = 0.0;
+    const float theta_ = glm::radians<float>(0.0);
     const float phi = glm::radians<float>(m_phi);
-	m_lookAt = vec3 (0.0, 0.0, 0.0); 
+	m_lookAt = glm::vec3(0, 0, 0); // Reset lookAt to origin
     // Look at the origin
-    m_lookAt += + glm::vec3(sinf(phi) * cosf(theta_), sinf(theta_), cosf(phi) * cosf(theta_));
-
-    m_viewMatrix = glm::lookAt(m_pos, m_lookAt, vec3(0, 1, 0));
+    m_lookAt += glm::vec3(sinf(phi) * cosf(theta_), sinf(theta_), cosf(phi) * cosf(theta_));
+	cout << "m_lookAt: " << glm::to_string(m_lookAt) << endl;
     m_projectionMatrix = glm::perspective(glm::radians(m_fovY), aspect_ratio, m_nearPlane, m_farPlane);
     m_viewMatrix = glm::lookAt(m_pos, m_lookAt, glm::vec3(0, 1, 0)); // Up vector is (0, 1, 0)
 }
