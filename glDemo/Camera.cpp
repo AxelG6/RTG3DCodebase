@@ -40,11 +40,7 @@ void Camera::Init(float _screenWidth, float _screenHeight, Scene* _scene)
 void Camera::Tick(float _dt, float aspectRatio)
 {
 	float aspect_ratio = aspectRatio;
-	const float theta_ = glm::radians<float>(m_theta);
-	const float phi = glm::radians<float>(m_phi);
 
-	m_lookAt = m_pos + glm::vec3(sinf(phi) * cosf(theta_), sinf(theta_), cosf(phi) * cosf(theta_));
-	
 	m_viewMatrix = glm::lookAt(m_pos, m_lookAt, vec3(0, 1, 0));
 	m_projectionMatrix = glm::perspective(glm::radians(m_fovY), aspect_ratio, m_nearPlane, m_farPlane);
 }
@@ -92,9 +88,15 @@ float Camera::getPhi() {
 
 void Camera::rotateCamera(float _dTheta, float _dPhi) {
 
-	m_theta += _dTheta;
-	m_phi += _dPhi;
-
+	m_theta += _dTheta*0.1;
+	m_phi += _dPhi*0.1;
+	const float theta_ = glm::radians<float>(m_theta);
+	const float phi_= glm::radians<float>(m_phi);
+	glm::vec3 direction;
+	direction.x = sinf(phi_) * cosf(theta_);
+	direction.y = sinf(theta_);
+	direction.z = cosf(phi_) * cosf(theta_);
+	m_lookAt = m_pos + direction;
 	calculateDerivedValues();
 }
 

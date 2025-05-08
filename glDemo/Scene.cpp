@@ -3,6 +3,7 @@
 #include "CameraFactory.h"
 #include "Camera.h"
 #include "orthoCamera.h"
+#include "FPCamera.h"
 #include "LightFactory.h"
 #include "Light.h"
 #include "ModelFactory.h"
@@ -363,8 +364,19 @@ void Scene::Input()
 void Scene::mouseMoveHandlerC(double _xpos, double _ypos)
 {
 
-		if (m_useCamera)
-			m_useCamera->rotateCamera(_xpos,_ypos);
+	if (m_useCamera) {
+		FirstPersonCamera* cam = dynamic_cast<FirstPersonCamera*>(m_useCamera);
+
+		if (cam)
+		{
+			cam->rotateCamera(_xpos, _ypos);
+		}
+		else
+		{
+			// Handle the case where m_useCamera is not of type Camera
+			cout << "Camera is not of type Camera" << endl;
+		}
+	}
 }
 
 void Scene::mouseScrollHandlerC(double _xoffset, double _yoffset) {
@@ -384,14 +396,19 @@ void Scene::CameraMovement(vec3 direction, float speed)
 	if (m_useCamera)
 	{
 		OrthographicCamera* cam = dynamic_cast<OrthographicCamera*>(m_useCamera);
+		FirstPersonCamera* cam2 = dynamic_cast<FirstPersonCamera*>(m_useCamera);
 		if (cam)
 		{
 			cam->move(direction, speed); // Move left along the x-axis
 
 		}
+		else if (cam2)
+		{
+			cam2->move(direction, speed); // Move left along the x-axis
+		}
 		else
 		{
-			m_useCamera->Move(direction * speed); // Move left along the x-axis
+			 // Move left along the x-axis
 		}
 	}
 }

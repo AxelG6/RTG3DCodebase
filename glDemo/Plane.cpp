@@ -35,6 +35,10 @@ void Plane::PlaneGen(int div, float width)
 	float z = 0.0f;
 	float w = 1.0f;
 
+	float nx = 0.0f; // Normal in X direction
+	float ny = -1.0f; // Normal in Y direction (pointing upward)
+	float nz = 0.0f; // Normal in Z direction
+
 	for (int i = 0; i <= width; i++)
 	{
 		
@@ -44,6 +48,10 @@ void Plane::PlaneGen(int div, float width)
 				procedArray.push_back(y);
 				procedArray.push_back(z);
 				procedArray.push_back(w);
+
+				procedArray.push_back(nx);
+				procedArray.push_back(ny);
+				procedArray.push_back(nz);
 				x += 0.05f;
 			}
 		z += 0.05;
@@ -94,8 +102,10 @@ void Plane::Load(ifstream& _file)
 	glGenBuffers(1, &m_vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, procedArray.size() * sizeof(float), procedArray.data(), GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, (const GLvoid*)0);
+	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (const GLvoid*)0); // Position
 	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (const GLvoid*)(4 * sizeof(float))); // Normal
+	glEnableVertexAttribArray(1);
 
 	// setup vbo for cube) index buffer
 	glGenBuffers(1, &m_indexBuffer);

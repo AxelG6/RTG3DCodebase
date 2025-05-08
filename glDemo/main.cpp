@@ -2,14 +2,12 @@
 #include "core.h"
 #include "TextureLoader.h"
 #include "GUClock.h"
-#include "PrincipleAxes.h"
 #include "shader_setup.h"
 #include "helper.h"
 #include "AIMesh.h"
-#include "Cube.h"
 #include "Scene.h"
-#include "Plane.h"
 #include "Model.h"
+
 
 
 using namespace std;
@@ -24,9 +22,6 @@ GUClock* g_gameClock = nullptr;
 bool				g_mouseDown = false;
 double				g_prevMouseX, g_prevMouseY;
 
-// Global Example objects
-// shouldn't really be anything in here for the final submission
-
 //Global Game Object
 Scene* g_Scene = nullptr;
 // Window size
@@ -35,6 +30,11 @@ const unsigned int g_initHeight = 1024;
 
 float windowHeight = 0;
 float windowWidth = 0;
+bool aDown = false;
+bool dDown = false;
+bool wDown = false;
+bool sDown = false;
+
 #pragma endregion
 
 
@@ -48,7 +48,7 @@ void mouseButtonHandler(GLFWwindow* _window, int _button, int _action, int _mods
 void mouseScrollHandler(GLFWwindow* _window, double _xoffset, double _yoffset);
 void mouseEnterHandler(GLFWwindow* _window, int _entered);
 
-
+void input(); // Function to handle input events
 int main()
 {
 	//
@@ -172,7 +172,7 @@ void renderScene()
 void updateScene() 
 {
 	float tDelta = 0.0f;
-
+	input();
 	if (g_gameClock) {
 
 		g_gameClock->tick();
@@ -215,16 +215,19 @@ void keyboardHandler(GLFWwindow* _window, int _key, int _scancode, int _action, 
 			g_Scene->Input();
 			break;
 		case GLFW_KEY_A:
-			g_Scene->CameraMovement(vec3(0, 0, 1), 0.1f);
+			aDown = true;
+			
 			break;
 		case GLFW_KEY_D:
-			g_Scene->CameraMovement(vec3(0, 0, -1), 0.1f);
+			dDown = true;
+			
 			break;
 		case GLFW_KEY_W:
-			g_Scene->CameraMovement(vec3(-1, 0, 0), 0.1f);
+			wDown = true;
+			
 			break;
 		case GLFW_KEY_S:
-			g_Scene->CameraMovement(vec3(1, 0, 0), 0.1f);
+			sDown = true;
 			break;
 		default:
 		{
@@ -236,6 +239,19 @@ void keyboardHandler(GLFWwindow* _window, int _key, int _scancode, int _action, 
 		// handle key release events
 		switch (_key)
 		{
+		case GLFW_KEY_A:
+			aDown = false;
+			break;
+		case GLFW_KEY_D:
+			dDown = false;
+			break;
+		case GLFW_KEY_W:
+			wDown = false;
+			break;
+		case GLFW_KEY_S:
+			sDown = false;
+			break;
+
 		default:
 		{
 		}
@@ -287,3 +303,14 @@ void mouseEnterHandler(GLFWwindow* _window, int _entered)
 {
 }
 
+void input()
+{
+	if (aDown == true)
+		g_Scene->CameraMovement(vec3(0, 0, 1), 0.1f);
+	if (dDown == true)
+		g_Scene->CameraMovement(vec3(0, 0, -1), 0.1f);
+	if (wDown == true)
+		g_Scene->CameraMovement(vec3(-1, 0, 0), 0.1f);
+	if (sDown == true)
+		g_Scene->CameraMovement(vec3(1, 0, 0), 0.1f);
+}
