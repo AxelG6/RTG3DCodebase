@@ -13,7 +13,7 @@ out vec4 fragColor;
 // Uniforms (optional)
 uniform vec3 lightDir = normalize(vec3(-1.0, -1.0, -1.0)); // simple directional light
 uniform vec3 baseColor = vec3(0.2, 0.6, 1.0);              // object base color
-// uniform sampler2D diffuseMap; // Uncomment if using texture
+uniform sampler2D diffuseMap; // Uncomment if using texture
 
 void main() {
     // Normalize interpolated normal

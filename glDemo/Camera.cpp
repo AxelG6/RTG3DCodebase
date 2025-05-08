@@ -15,6 +15,7 @@ Camera::Camera()
 	m_type = "CAMERA";
 	m_theta = 0;
 	m_phi = 0;
+	calculateDerivedValues();
 }
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -38,15 +39,14 @@ void Camera::Init(float _screenWidth, float _screenHeight, Scene* _scene)
 /////////////////////////////////////////////////////////////////////////////////////
 void Camera::Tick(float _dt, float aspectRatio)
 {
-
+	float aspect_ratio = aspectRatio;
 	const float theta_ = glm::radians<float>(m_theta);
 	const float phi = glm::radians<float>(m_phi);
 
 	m_lookAt = m_pos + glm::vec3(sinf(phi) * cosf(theta_), sinf(theta_), cosf(phi) * cosf(theta_));
-	float aspect_ratio = aspectRatio;
+	
 	m_viewMatrix = glm::lookAt(m_pos, m_lookAt, vec3(0, 1, 0));
 	m_projectionMatrix = glm::perspective(glm::radians(m_fovY), aspect_ratio, m_nearPlane, m_farPlane);
-	cout << glm::to_string(m_lookAt) << endl;
 }
 
 void Camera::Load(ifstream& _file)

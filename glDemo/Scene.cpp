@@ -64,7 +64,10 @@ GameObject* Scene::GetGameObject(string _GOName)
 	assert(0);
 	return nullptr;
 }
-
+Camera* Scene::GetUseCamera()
+{
+	return m_useCamera;
+}
 Camera* Scene::GetCamera(string _camName)
 {
 	for (list<Camera*>::iterator it = m_Cameras.begin(); it != m_Cameras.end(); it++)
@@ -346,8 +349,6 @@ void Scene::Init()
 		(*it)->Init(this);
 	}
 }
-
-
 //change name
 void Scene::Input()
 {
@@ -359,14 +360,12 @@ void Scene::Input()
 	m_useCamera = (*it);
 }
 
-
 void Scene::mouseMoveHandlerC(double _xpos, double _ypos)
 {
 
 		if (m_useCamera)
 			m_useCamera->rotateCamera(_xpos,_ypos);
 }
-
 
 void Scene::mouseScrollHandlerC(double _xoffset, double _yoffset) {
 
@@ -379,6 +378,20 @@ void Scene::mouseScrollHandlerC(double _xoffset, double _yoffset) {
 	}
 }
 
-void mouseEnterHandlerC(GLFWwindow* _window, int _entered)
+
+void Scene::CameraMovement(vec3 direction, float speed)
 {
+	if (m_useCamera)
+	{
+		OrthographicCamera* cam = dynamic_cast<OrthographicCamera*>(m_useCamera);
+		if (cam)
+		{
+			cam->move(direction, speed); // Move left along the x-axis
+
+		}
+		else
+		{
+			m_useCamera->Move(direction * speed); // Move left along the x-axis
+		}
+	}
 }

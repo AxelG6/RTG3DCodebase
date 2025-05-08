@@ -200,6 +200,8 @@ void resizeWindow(GLFWwindow* _window, int _width, int _height)
 // Function to call to handle keyboard input
 void keyboardHandler(GLFWwindow* _window, int _key, int _scancode, int _action, int _mods)
 {
+	
+
 	if (_action == GLFW_PRESS) {
 
 		// check which key was pressed...
@@ -211,6 +213,18 @@ void keyboardHandler(GLFWwindow* _window, int _key, int _scancode, int _action, 
 
 		case GLFW_KEY_SPACE:
 			g_Scene->Input();
+			break;
+		case GLFW_KEY_A:
+			g_Scene->CameraMovement(vec3(0, 0, 1), 0.1f);
+			break;
+		case GLFW_KEY_D:
+			g_Scene->CameraMovement(vec3(0, 0, -1), 0.1f);
+			break;
+		case GLFW_KEY_W:
+			g_Scene->CameraMovement(vec3(-1, 0, 0), 0.1f);
+			break;
+		case GLFW_KEY_S:
+			g_Scene->CameraMovement(vec3(1, 0, 0), 0.1f);
 			break;
 		default:
 		{
@@ -273,4 +287,3 @@ void mouseEnterHandler(GLFWwindow* _window, int _entered)
 {
 }
 
-#pragma endregion

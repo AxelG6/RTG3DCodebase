@@ -14,7 +14,7 @@ Camera* CameraFactory::makeNewCam(string _type)
 	}
 	else if (_type == "ORTHO")
 	{
-		return new OrthoCamera(0,0, 0, 0, 0, 0, 0);
+		return new OrthographicCamera();
 	}
 	else
 	{

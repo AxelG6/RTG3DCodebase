@@ -105,7 +105,7 @@ public:
 	glm::mat4 viewTransform(); // return a const reference to the view transform matrix for the camera
 
 	glm::mat4 projectionTransform();
-	void calculateDerivedValues();
+	virtual void calculateDerivedValues();
 
 
 protected:

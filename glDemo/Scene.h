@@ -50,7 +50,8 @@ public:
 
 	void mouseMoveHandlerC(double _xpos, double _ypos);
 	void mouseScrollHandlerC(double _xoffset, double _yoffset);
-
+	Camera* GetUseCamera();
+	void CameraMovement(glm::vec3 direction, float speed);
 protected:
 
 	//data structures containing pointers to all our stuff
