@@ -1,29 +1,27 @@
 #pragma once
-
 #include "Camera.h"
-#include <glm/glm.hpp>
+#include <GLFW/glfw3.h>
 
-class FirstPersonCamera : public Camera
-{
+class FirstPersonCamera : public Camera {
 public:
-    // Constructor
     FirstPersonCamera();
 
-    // Destructor
-    ~FirstPersonCamera();
+    // Override Init to set default values
+    void Init(float _w, float _h, Scene* _scene) override;
 
-    // Move the camera forward or backward
-    void MoveForward(float distance);
+    // Override Tick to handle movement and rotation
+    void Tick(float _dt, float aspectRatio) override;
 
-    // Move the camera to the right or left
-    void MoveRight(float distance);
+    // Handle keyboard input
+    void ProcessKeyboardInput(int key, float deltaTime);
 
-    // Move the camera upwards or downwards
-    void MoveUp(float distance);
+    // Handle mouse input
+    void ProcessMouseMovement(float xOffset, float yOffset);
 
-    // Rotate the camera based on horizontal and vertical deltas
-    void Rotate(float deltaX, float deltaY);
+    // Handle mouse scroll
+    void ProcessMouseScroll(float yOffset);
 
 private:
-    void calculateDerivedValues() override;
+    float speed; // Movement speed
+    float sensitivity; // Mouse sensitivity
 };

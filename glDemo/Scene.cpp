@@ -404,78 +404,11 @@ void Scene::CameraMovement(vec3 direction, float speed)
 		}
 		else if (cam2)
 		{
-			// Move left along the x-axis
+			cam2->Move(direction,speed);// Move left along the x-axis
 		}
 		else
 		{
 			 // Move left along the x-axis
-		}
-	}
-}
-
-void Scene::CameraMovementW(float speed)
-{
-	if (m_useCamera)
-	{
-		FirstPersonCamera* cam = dynamic_cast<FirstPersonCamera*>(m_useCamera);
-
-		if (cam)
-		{
-			cam->MoveForward(speed);
-		}
-		else
-		{
-			// Move left along the x-axis
-		}
-	}
-}
-
-void Scene::CameraMovementS(float speed)
-{
-	if (m_useCamera)
-	{
-		FirstPersonCamera* cam = dynamic_cast<FirstPersonCamera*>(m_useCamera);
-
-		if (cam)
-		{
-			cam-> MoveForward(-speed); // Move left along the x-axis
-		}
-		else
-		{
-			// Move left along the x-axis
-		}
-	}
-}
-void Scene::CameraMovementD(float speed)
-{
-	if (m_useCamera)
-	{
-		FirstPersonCamera* cam = dynamic_cast<FirstPersonCamera*>(m_useCamera);
-
-		if (cam)
-		{
-			cam-> MoveRight(speed); // Move left along the x-axis
-		}
-		else
-		{
-			// Move left along the x-axis
-		}
-	}
-}
-		
-void Scene::CameraMovementA(float speed)
-{
-	if (m_useCamera)
-	{
-		FirstPersonCamera* cam = dynamic_cast<FirstPersonCamera*>(m_useCamera);
-
-		if (cam)
-		{
-			cam-> MoveRight(-speed); // Move left along the x-axis
-		}
-		else
-		{
-			// Move left along the x-axis
 		}
 	}
 }

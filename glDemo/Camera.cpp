@@ -31,7 +31,7 @@ Camera::~Camera()
 void Camera::Init(float _screenWidth, float _screenHeight, Scene* _scene)
 {
 	float aspect_ratio = _screenWidth / _screenHeight;
-	m_projectionMatrix = glm::perspective(glm::radians(m_fovY), aspect_ratio, m_nearPlane, m_farPlane);
+
 }
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -90,6 +90,7 @@ void Camera::rotateCamera(float _dTheta, float _dPhi) {
 
 	m_theta += _dTheta*0.1;
 	m_phi += _dPhi*0.1;
+
 	const float theta_ = glm::radians<float>(m_theta);
 	const float phi_= glm::radians<float>(m_phi);
 	glm::vec3 direction;
@@ -97,7 +98,8 @@ void Camera::rotateCamera(float _dTheta, float _dPhi) {
 	direction.y = sinf(theta_);
 	direction.z = cosf(phi_) * cosf(theta_);
 	m_lookAt = m_pos + direction;
-	calculateDerivedValues();
+	cout << "Camera::rotateCamera: m_lookAt = " << glm::to_string(m_lookAt) << endl;
+	
 }
 
 float Camera::getRadius() {

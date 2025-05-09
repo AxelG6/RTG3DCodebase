@@ -270,7 +270,7 @@ void mouseMoveHandler(GLFWwindow* _window, double _xpos, double _ypos)
 		float dx = float(_xpos - g_prevMouseX);// *360.0f * tDelta;
 		float dy = float(_ypos - g_prevMouseY);// *360.0f * tDelta;
 		
-		g_Scene->mouseMoveHandlerC(dy, dx);
+		g_Scene->mouseMoveHandlerC(-dy, -dx);
 		g_prevMouseX = _xpos;
 		g_prevMouseY = _ypos;
 	}
@@ -308,14 +308,14 @@ void input()
 {
 	if (aDown == true)
 		g_Scene->CameraMovement(vec3(0, 0, 1), 0.001f);
-	g_Scene->CameraMovementA(0.001f);
+		
 	if (dDown == true)
 		g_Scene->CameraMovement(vec3(0, 0, -1), 0.001f);
-	g_Scene->CameraMovementD(0.001f);
+	
 	if (wDown == true)
 		g_Scene->CameraMovement(vec3(-1, 0, 0), 0.001f);
-	g_Scene->CameraMovementW(0.001f);
+	
 	if (sDown == true)
 		g_Scene->CameraMovement(vec3(1, 0, 0), 0.001f);
-	    g_Scene->CameraMovementS(0.001f);
+	    
 }

@@ -52,10 +52,7 @@ public:
 	void mouseScrollHandlerC(double _xoffset, double _yoffset);
 	Camera* GetUseCamera();
 	void CameraMovement(glm::vec3 direction, float speed);
-	void CameraMovementW(float speed);
-	void CameraMovementS(float speed);
-	void CameraMovementA(float speed);
-	void CameraMovementD(float speed);
+	
 
 protected:
 

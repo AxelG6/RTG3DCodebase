@@ -51,7 +51,7 @@ public:
 	string GetName() { return m_name; }
 	void SetName(string _name) { m_name = _name; }
 
-	void Move(glm::vec3 _d) { m_pos += _d; }
+	void Move(glm::vec3 _d, float dt) { m_pos += _d * dt; calculateDerivedValues(); }
 
 	//where am I looking at
 	vec3 GetLookAt() { return m_lookAt; }
