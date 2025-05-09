@@ -52,6 +52,11 @@ void Plane::PlaneGen(int div, float width)
 				procedArray.push_back(nx);
 				procedArray.push_back(ny);
 				procedArray.push_back(nz);
+
+				float u = static_cast<float>(j) / div;   // u coordinate (x direction)
+				float v = static_cast<float>(i) / width; // v coordinate (z direction)
+				procedArray.push_back(u);
+				procedArray.push_back(v);
 				x += 0.05f;
 			}
 		z += 0.05;
@@ -82,7 +87,7 @@ void Plane::PlaneIndex(int div)
 }
 
 void Plane::Render() {
-
+	
 	glBindVertexArray(m_vao);
 	glDrawElements(GL_TRIANGLES, m_numFaces * 3, GL_UNSIGNED_INT, (const GLvoid*)0);
 }
@@ -102,12 +107,15 @@ void Plane::Load(ifstream& _file)
 	glGenBuffers(1, &m_vertexBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
 	glBufferData(GL_ARRAY_BUFFER, procedArray.size() * sizeof(float), procedArray.data(), GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (const GLvoid*)0); // Position
+	
+	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (const GLvoid*)0);               // Position
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(float), (const GLvoid*)(4 * sizeof(float))); // Normal
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (const GLvoid*)(4 * sizeof(float))); // Normal
 	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 9 * sizeof(float), (const GLvoid*)(7 * sizeof(float))); // TexCoords
+	glEnableVertexAttribArray(2);
 
-	// setup vbo for cube) index buffer
+	// setup vbo for index buffer
 	glGenBuffers(1, &m_indexBuffer);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, procIndexArray.size() * sizeof(GLuint), procIndexArray.data(), GL_STATIC_DRAW);

@@ -85,7 +85,5 @@ void OrthographicCamera::move(const glm::vec3& direction, float _dt) {
     m_pos += direction * _dt; 
     m_lookAt += direction * _dt; // Move the look-at point with the camera
 	calculateDerivedValues();
-	cout << "Camera Position: " << glm::to_string(m_pos) << endl;
-	cout << "Camera LookAt: " << glm::to_string(m_lookAt) << endl;
 	// Update the view matrix
 }

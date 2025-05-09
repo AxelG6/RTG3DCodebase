@@ -306,11 +306,11 @@ void mouseEnterHandler(GLFWwindow* _window, int _entered)
 void input()
 {
 	if (aDown == true)
-		g_Scene->CameraMovement(vec3(0, 0, 1), 0.1f);
+		g_Scene->CameraMovement(vec3(0, 0, 1), 0.001f);
 	if (dDown == true)
-		g_Scene->CameraMovement(vec3(0, 0, -1), 0.1f);
+		g_Scene->CameraMovement(vec3(0, 0, -1), 0.001f);
 	if (wDown == true)
-		g_Scene->CameraMovement(vec3(-1, 0, 0), 0.1f);
+		g_Scene->CameraMovement(vec3(-1, 0, 0), 0.001f);
 	if (sDown == true)
-		g_Scene->CameraMovement(vec3(1, 0, 0), 0.1f);
+		g_Scene->CameraMovement(vec3(1, 0, 0), 0.001f);
 }
