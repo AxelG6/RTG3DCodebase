@@ -1,9 +1,5 @@
 #include "Wall.h"
 #include "stringHelp.h"
-#include "AIModel.h"
-#include "Scene.h"
-#include "Shader.h"
-#include "Texture.h"
 
 const int labyrinth[5][5] = {
     {1, 1, 1, 1, 1},

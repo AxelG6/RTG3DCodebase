@@ -22,6 +22,7 @@ GameObject* GameObjectFactory::makeNewGO(string _type)
 	{
 		return new Wall();
 	}
+
 	
 	else
 	{
