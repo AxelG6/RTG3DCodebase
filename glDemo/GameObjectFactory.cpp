@@ -22,8 +22,6 @@ GameObject* GameObjectFactory::makeNewGO(string _type)
 	{
 		return new Wall();
 	}
-
-	
 	else
 	{
 		printf("UNKNOWN GAME OBJECT TYPE: %s \n", _type.c_str());

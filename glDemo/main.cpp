@@ -173,6 +173,7 @@ void updateScene()
 {
 	float tDelta = 0.0f;
 	input();
+
 	if (g_gameClock) {
 
 		g_gameClock->tick();
@@ -307,10 +308,14 @@ void input()
 {
 	if (aDown == true)
 		g_Scene->CameraMovement(vec3(0, 0, 1), 0.001f);
+	g_Scene->CameraMovementA(0.001f);
 	if (dDown == true)
 		g_Scene->CameraMovement(vec3(0, 0, -1), 0.001f);
+	g_Scene->CameraMovementD(0.001f);
 	if (wDown == true)
 		g_Scene->CameraMovement(vec3(-1, 0, 0), 0.001f);
+	g_Scene->CameraMovementW(0.001f);
 	if (sDown == true)
 		g_Scene->CameraMovement(vec3(1, 0, 0), 0.001f);
+	    g_Scene->CameraMovementS(0.001f);
 }

@@ -98,8 +98,8 @@ FILE: Assets\\cube\\cube_highpoly.obj
 {
 TYPE: PLANE
 NAME: PLANE
-DIV: 100.0
-WIDTH: 100.0
+DIV: 150.0
+WIDTH: 150.0
 }
 
 TEXTURES 7
@@ -169,7 +169,7 @@ SHADER: WAVE
 }
 {
 TYPE: WALL
-NAME: DUCK
+NAME: WALL
 POS: 0.0 -10.0 0.0
 ROT: 0.0 0.0 0.0
 SCALE: 0.5 0.5 0.5

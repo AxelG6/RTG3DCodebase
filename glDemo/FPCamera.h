@@ -1,22 +1,29 @@
 #pragma once
+
 #include "Camera.h"
+#include <glm/glm.hpp>
 
 class FirstPersonCamera : public Camera
 {
 public:
+    // Constructor
     FirstPersonCamera();
+
+    // Destructor
     ~FirstPersonCamera();
 
-    // Handle keyboard input for movement
-	void move(const glm::vec3& direction, float _dt);
+    // Move the camera forward or backward
+    void MoveForward(float distance);
 
-    // Handle mouse input for rotation
+    // Move the camera to the right or left
+    void MoveRight(float distance);
+
+    // Move the camera upwards or downwards
+    void MoveUp(float distance);
+
+    // Rotate the camera based on horizontal and vertical deltas
     void Rotate(float deltaX, float deltaY);
 
-    // Update the camera matrices based on movement and rotation
-    void Update(float deltaTime);
-
 private:
-    float m_speed;         // Movement speed
-    float m_sensitivity;   // Mouse sensitivity
+    void calculateDerivedValues() override;
 };
