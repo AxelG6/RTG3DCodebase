@@ -1,4 +1,5 @@
 #include "Wall.h"
+#include "ExampleGO.h"
 #include "stringHelp.h"
 
 const int labyrinth[5][5] = {
@@ -9,21 +10,6 @@ const int labyrinth[5][5] = {
     {1, 1, 1, 1, 1}
 };
 std::vector<vec3> location;
-
-Wall::Wall()
-{
-    for (int i = 0; i < 5; ++i)
-    {
-        for (int j = 0; j < 5; ++j)
-        {
-            if (labyrinth[i][j] == 1)
-            {
-                m_pos = glm::vec3(i * 1.0f, 0.0f, j * 1.0f); // Adjust position based on the labyrinth
-                location.push_back(m_pos);
-            }
-        }
-    }
-}
 
 void Wall::Load(ifstream& _file)
 {
@@ -42,5 +28,16 @@ void Wall::Render()
 
 void Wall::Init(Scene* _scene)
 {
+    for (int i = 0; i < 5; ++i)
+    {
+        for (int j = 0; j < 5; ++j)
+        {
+            if (labyrinth[i][j] == 1)
+            {
+                m_pos = glm::vec3(i * 1.0f, 0.0f, j * 1.0f); // Adjust position based on the labyrinth
+                location.push_back(m_pos);
+            }
+        }
+    }
     ExampleGO::Init(_scene);
 }
