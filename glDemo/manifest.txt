@@ -71,10 +71,10 @@ NAME: DIR
 POS: 0.0 5.0 0.0
 COL: 1.0 1.0 1.0
 AMB: 0.2 0.2 0.2
-DIR: 0.0 1.0 0.0
+DIR: 0.1 1.0 0.1
 }
 
-MODELS 4
+MODELS 5
 {
 TYPE: AI
 NAME: BEAST
@@ -89,6 +89,11 @@ FILE: Assets\\gsphere.obj
 TYPE: AI
 NAME: DUCK
 FILE: Assets\\duck\\rubber_duck_toy_4k.obj
+}
+{
+TYPE: AI
+NAME: WALL
+FILE: Assets\\cube\\cube_highpoly.obj
 }
 {
 TYPE: PLANE
@@ -168,8 +173,8 @@ NAME: DUCK
 POS: 0.0 0.0 0.0
 ROT: 0.0 0.0 0.0
 SCALE: 0.5 0.5 0.5
-ROTINC: 0.0 0.0 0.0
-MODEL: DUCK
-TEXTURE: GRASS
-SHADER: WAVE
+ROTINC: 0.1 0.1 0.1
+MODEL: WALL
+TEXTURE: DUCK
+SHADER: TEXDIR
 }

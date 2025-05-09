@@ -206,6 +206,12 @@
     <ClCompile Include="FPCamera.cpp">
       <Filter>Scene Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Wall.h">
+      <Filter>Scene Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>Scene Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="manifest.txt">
