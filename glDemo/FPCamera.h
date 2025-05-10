@@ -13,14 +13,14 @@ public:
     void Tick(float _dt, float aspectRatio) override;
 
     // Handle keyboard input
-    void ProcessKeyboardInput(int key, float deltaTime);
+    void ProcessKeyboardInput(const glm::vec3& direction, float _dt);
 
     // Handle mouse input
     void ProcessMouseMovement(float xOffset, float yOffset);
 
     // Handle mouse scroll
     void ProcessMouseScroll(float yOffset);
-
+    void rotateCamera(float xOffset, float yOffset);
 private:
     float speed; // Movement speed
     float sensitivity; // Mouse sensitivity

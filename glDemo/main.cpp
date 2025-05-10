@@ -287,6 +287,7 @@ void mouseButtonHandler(GLFWwindow* _window, int _button, int _action, int _mods
 		{
 			g_mouseDown = true;
 			glfwGetCursorPos(_window, &g_prevMouseX, &g_prevMouseY);
+			
 		}
 		else if (_action == GLFW_RELEASE) 
 		{

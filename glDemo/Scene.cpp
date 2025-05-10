@@ -370,7 +370,7 @@ void Scene::mouseMoveHandlerC(double _xpos, double _ypos)
 
 		if (cam)
 		{
-			cam->rotateCamera(_xpos, _ypos);
+			cam->ProcessMouseMovement(_xpos, _ypos);
 		}
 		else
 		{
@@ -400,12 +400,13 @@ void Scene::CameraMovement(vec3 direction, float speed)
 		FirstPersonCamera* cam2 = dynamic_cast<FirstPersonCamera*>(m_useCamera);
 		if (cam)
 		{
-			cam->move(direction, speed); // Move left along the x-axis
+			cam->move(direction, speed); 
 
 		}
 		else if (cam2)
 		{
-			cam2->Move(direction,speed);// Move left along the x-axis
+			
+			cam2->ProcessKeyboardInput(direction, speed); 
 		}
 		else
 		{

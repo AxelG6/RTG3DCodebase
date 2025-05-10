@@ -93,12 +93,14 @@ void Camera::rotateCamera(float _dTheta, float _dPhi) {
 
 	const float theta_ = glm::radians<float>(m_theta);
 	const float phi_= glm::radians<float>(m_phi);
+
 	glm::vec3 direction;
 	direction.x = sinf(phi_) * cosf(theta_);
 	direction.y = sinf(theta_);
 	direction.z = cosf(phi_) * cosf(theta_);
 	m_lookAt = m_pos + direction;
 	cout << "Camera::rotateCamera: m_lookAt = " << glm::to_string(m_lookAt) << endl;
+	calculateDerivedValues();
 	
 }
 
