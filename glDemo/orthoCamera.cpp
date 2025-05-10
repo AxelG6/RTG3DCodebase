@@ -38,6 +38,17 @@ void OrthographicCamera::InitOrthographic(float left, float right, float bottom,
 // Tick() - Update the projection and view matrices
 /////////////////////////////////////////////////////////////////////////////////////
 void OrthographicCamera::Tick(float _dt, float aspectRatio) {
+    
+
+    float width = m_right - m_left;
+    float height = m_top - m_bottom;
+
+    // Keep the height constant and adjust the width
+    float newWidth = height * aspectRatio;
+    float centerX = (m_left + m_right) / 2.0f; // Find the center of the bounds
+    m_left = centerX - newWidth / 2.0f;
+    m_right = centerX + newWidth / 2.0f;
+
     // Recalculate the projection matrix if necessary
     m_projectionMatrix = glm::ortho(m_left, m_right, m_bottom, m_top, m_nearPlane, m_farPlane);
     

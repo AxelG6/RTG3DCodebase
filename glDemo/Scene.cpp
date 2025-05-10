@@ -27,6 +27,7 @@ Scene::~Scene()
 //tick all my Game Objects, lights and cameras
 void Scene::Update(float _dt,float aspectRatio)
 {
+	
 	//update all lights
 	for (list<Light*>::iterator it = m_Lights.begin(); it != m_Lights.end(); it++)
 	{

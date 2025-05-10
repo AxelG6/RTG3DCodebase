@@ -2,14 +2,27 @@
 #include "ExampleGO.h"
 #include "stringHelp.h"
 
-const int labyrinth[5][5] = {
-    {1, 1, 1, 1, 1},
-    {1, 0, 0, 0, 1},
-    {1, 0, 1, 0, 1},
-    {1, 0, 0, 0, 1},
-    {1, 1, 1, 1, 1}
+const int WIDHT = 10;
+const int labyrinth[WIDHT][WIDHT] = {
+    {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+    {1, 0, 0, 0, 1, 0, 1, 0, 0, 1},
+    {1, 0, 1, 0, 1, 0, 0, 0, 1, 1},
+    {1, 0, 0, 0, 0, 1, 1, 0, 0, 1},
+    {1, 1, 1, 0, 0, 0, 0, 0, 1, 1},
+    {1, 1, 1, 0, 1, 1, 1, 0, 1, 1},
+	{1, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+	{1, 0, 1, 0, 1, 0, 0, 1, 0, 1},
+	{1, 0, 0, 0, 1, 0, 0, 0, 0, 1},
+	{1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
 };
+
 std::vector<vec3> location;
+
+Wall::Wall()
+{
+	m_type = "WALL";
+	
+}
 
 void Wall::Load(ifstream& _file)
 {
@@ -28,9 +41,9 @@ void Wall::Render()
 
 void Wall::Init(Scene* _scene)
 {
-    for (int i = 0; i < 5; ++i)
+    for (int i = 0; i < WIDHT; ++i)
     {
-        for (int j = 0; j < 5; ++j)
+        for (int j = 0; j < WIDHT; ++j)
         {
             if (labyrinth[i][j] == 1)
             {

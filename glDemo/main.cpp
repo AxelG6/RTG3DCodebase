@@ -30,6 +30,7 @@ const unsigned int g_initHeight = 1024;
 
 float windowHeight = 0;
 float windowWidth = 0;
+
 bool aDown = false;
 bool dDown = false;
 bool wDown = false;
@@ -169,9 +170,10 @@ void renderScene()
 
 
 // Function called to animate elements in the scene
-void updateScene() 
+void updateScene()
 {
 	float tDelta = 0.0f;
+	
 	input();
 
 	if (g_gameClock) {
@@ -273,6 +275,7 @@ void mouseMoveHandler(GLFWwindow* _window, double _xpos, double _ypos)
 		g_Scene->mouseMoveHandlerC(-dy, -dx);
 		g_prevMouseX = _xpos;
 		g_prevMouseY = _ypos;
+
 	}
 }
 
@@ -307,15 +310,15 @@ void mouseEnterHandler(GLFWwindow* _window, int _entered)
 void input()
 {
 	if (aDown == true)
-		g_Scene->CameraMovement(vec3(0, 0, 1), 0.001f);
+		g_Scene->CameraMovement(vec3(0, 0, 1), 0.1f);
 		
 	if (dDown == true)
-		g_Scene->CameraMovement(vec3(0, 0, -1), 0.001f);
+		g_Scene->CameraMovement(vec3(0, 0, -1), 0.1f);
 	
 	if (wDown == true)
-		g_Scene->CameraMovement(vec3(-1, 0, 0), 0.001f);
+		g_Scene->CameraMovement(vec3(-1, 0, 0), 0.1f);
 	
 	if (sDown == true)
-		g_Scene->CameraMovement(vec3(1, 0, 0), 0.001f);
+		g_Scene->CameraMovement(vec3(1, 0, 0), 0.1f);
 	    
 }
