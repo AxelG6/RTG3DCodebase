@@ -9,11 +9,9 @@ layout (location=2) in vec3 vertexTexCoord;
 layout (location=3) in vec3 vertexNormal;
 
 out SimplePacket {
-
   vec3 surfaceWorldPos;
   vec3 surfaceNormal;
-	vec2 texCoord;
-
+  vec2 texCoord;
 } outputVertex;
 
 

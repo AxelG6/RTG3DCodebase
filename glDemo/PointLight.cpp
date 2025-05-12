@@ -27,7 +27,7 @@ void PointLight::SetRenderValues(unsigned int _prog)
     Light::SetRenderValues(_prog);
 
     GLint loc;
-    string attenuationString = m_name + "Attenuation"; // Attenuation uniform name
+    string attenuationString = m_name + "Atten"; // Attenuation uniform name
 
     if (Helper::SetUniformLocation(_prog, attenuationString.c_str(), &loc))
         glUniform3fv(loc, 1, glm::value_ptr(m_attenuation));

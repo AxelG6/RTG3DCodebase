@@ -3,13 +3,13 @@
 // Diffuse texture - point light
 
 // Texture sampler (for diffuse surface color)
-layout(binding = 0) uniform sampler2D texture;
+layout(binding = 0) uniform sampler2D sampleTexture;
 
 // Point light model
-uniform vec3 pointLightPos;     // Position of the point light
-uniform vec3 pointLightCol;     // Color/intensity of the point light
-uniform vec3 pointLightAmb;     // Ambient color/intensity of the point light
-uniform vec3 pointLightAtten;   // Attenuation factors (constant, linear, quadratic)
+uniform vec3 POINTPos;     // Position of the point light
+uniform vec3 POINTCol;     // Color/intensity of the point light
+uniform vec3 POINTAmb;     // Ambient color/intensity of the point light
+uniform vec3 POINTAtten;   // Attenuation factors (constant, linear, quadratic)
 
 in SimplePacket {
     vec3 surfaceWorldPos; // Fragment position in world space
@@ -30,7 +30,7 @@ void main(void) {
     float l = max(dot(N, lightDir), 0.0);
 
     // Sample the surface color from the texture
-    vec4 surfaceColour = texture(texture, inputFragment.texCoord);
+    vec4 surfaceColour = texture(sampleTexture, inputFragment.texCoord);
 
     // Calculate diffuse color
     vec3 diffuseColour = surfaceColour.rgb * pointLightCol * l;
