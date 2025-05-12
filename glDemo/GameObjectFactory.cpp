@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include "ExampleGO.h"
 #include "Wall.h"
-
+#include "Torch.h"
 #include <assert.h>
 
 using std::string;
@@ -21,6 +21,10 @@ GameObject* GameObjectFactory::makeNewGO(string _type)
 	else if (_type == "WALL")
 	{
 		return new Wall();
+	}
+	else if (_type == "TORCH")
+	{
+		return new Torch();
 	}
 	else
 	{
