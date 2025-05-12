@@ -2,7 +2,7 @@ CAMERAS 4
 {
 TYPE: ORTHO
 NAME: CAM1
-POS:  5.0 70.0 0.0
+POS:  5.0 10.0 0.0
 LOOKAT: 0.0 0.0 0.0
 FOV: 45.0
 NEAR: 0.5
@@ -11,7 +11,7 @@ FAR: 100.0
 {
 TYPE: FPCAMERA
 NAME: CAM2
-POS:  1.0 1.0 1.0
+POS:  1.0 0.5 1.0
 LOOKAT: 1.0 0.0 1.0
 FOV: 45.0
 NEAR: 0.1
@@ -36,7 +36,7 @@ NEAR: 0.5
 FAR: 100.0
 }
 
-LIGHTS 5
+LIGHTS 6
 {
 TYPE: LIGHT
 NAME: WHITE
@@ -71,7 +71,15 @@ NAME: DIR
 POS: 0.0 5.0 0.0
 COL: 1.0 1.0 1.0
 AMB: 0.2 0.2 0.2
-DIR: 0.1 1.0 0.1
+DIR: 0.0 1.0 0.0
+}
+{
+TYPE: POINT
+NAME: POINT
+POS: 0.0 5.0 0.0
+COL: 1.0 0.0 0.0
+AMB: 0.0 0.5 0.5
+ATTENUATION: 0.1 0.1 0.1
 }
 
 MODELS 5
@@ -138,7 +146,8 @@ TYPE: FIF_JPEG
 NAME: GRASS
 FILE: Assets\\Textures\\download.jpeg
 }
-SHADERS 3
+
+SHADERS 4
 {
 NAME: FLAT
 VERTFILE: Assets\\Shaders\\flatColour.vert
@@ -154,6 +163,11 @@ NAME: WAVE
 VERTFILE: Assets\\Shaders\\waveMotion.vert
 FRAGFILE: Assets\\Shaders\\waveMotion.frag
 }
+{
+NAME: POINT
+VERTFILE: Assets\\Shaders\\point.vert
+FRAGFILE: Assets\\Shaders\\point.frag
+}
 
 GAMEOBJECTS 2
 {
@@ -165,7 +179,7 @@ SCALE: 1.0 1.0 1.0
 ROTINC: 0.0 0.0 0.0
 MODEL: PLANE
 TEXTURE: GRASS
-SHADER: WAVE
+SHADER: POINT
 }
 {
 TYPE: WALL
@@ -176,5 +190,5 @@ SCALE: 0.5 0.5 0.5
 ROTINC: 0.0 0.0 0.0
 MODEL: WALL
 TEXTURE: ROCK
-SHADER: TEXDIR
+SHADER: POINT
 }

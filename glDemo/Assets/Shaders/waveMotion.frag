@@ -8,6 +8,11 @@ uniform vec3 DIRDir; // Light direction
 uniform vec3 DIRCol; // Light color
 uniform vec3 DIRAmb; // Ambient light color
 
+// Point light attributes
+uniform float pointLightConstant;
+uniform float pointLightLinear;
+uniform float pointLightQuadratic;
+
 in SimplePacket {
   vec3 surfaceWorldPos;
   vec3 surfaceNormal;

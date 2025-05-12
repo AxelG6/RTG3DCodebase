@@ -151,6 +151,7 @@
     <ClInclude Include="FreeImage\FreeImage.h" />
     <ClInclude Include="orthoCamera.h" />
     <ClInclude Include="Plane.h" />
+    <ClInclude Include="PointLight.h" />
     <ClInclude Include="RenderPass.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="GameObject.h" />
@@ -184,6 +185,7 @@
     <ClCompile Include="ExampleGO.cpp" />
     <ClCompile Include="orthoCamera.cpp" />
     <ClCompile Include="Plane.cpp" />
+    <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectFactory.cpp" />
@@ -210,6 +212,8 @@
     <None Include="Assets\Shaders\texture-directional.vert" />
     <None Include="Assets\Shaders\waveMotion.frag" />
     <None Include="Assets\Shaders\waveMotion.vert" />
+    <None Include="point.frag" />
+    <None Include="point.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

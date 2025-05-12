@@ -66,10 +66,12 @@ GameObject* Scene::GetGameObject(string _GOName)
 	assert(0);
 	return nullptr;
 }
+
 Camera* Scene::GetUseCamera()
 {
 	return m_useCamera;
 }
+
 Camera* Scene::GetCamera(string _camName)
 {
 	for (list<Camera*>::iterator it = m_Cameras.begin(); it != m_Cameras.end(); it++)

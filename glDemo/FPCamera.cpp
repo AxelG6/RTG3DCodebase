@@ -2,7 +2,7 @@
 #include <glm/gtx/string_cast.hpp>
 
 FirstPersonCamera::FirstPersonCamera()
-    : speed(2.5f), sensitivity(0.1f) {
+    : speed(0.5f), sensitivity(0.1f) {
     m_type = "FIRST_PERSON_CAMERA";
 
 }
@@ -46,7 +46,7 @@ void FirstPersonCamera::ProcessKeyboardInput(const glm::vec3& direction, float _
 
     // Update the look-at point to move with the camera
     m_lookAt = m_pos + glm::normalize(m_lookAt - m_pos);
-    m_pos.y=1.0f; // Keep the camera at a fixed height
+    m_pos.y=0.5f; // Keep the camera at a fixed height
     // Debug output for position and look-at
     std::cout << "Camera::ProcessKeyboardInput: m_pos = " << glm::to_string(m_pos) << std::endl;
     std::cout << "Camera::ProcessKeyboardInput: m_lookAt = " << glm::to_string(m_lookAt) << std::endl;
