@@ -384,10 +384,19 @@ void Scene::mouseScrollHandlerC(double _xoffset, double _yoffset) {
 
 	if (m_useCamera)
 	{
-		if (_yoffset < 0.0)
-			m_useCamera->scaleRadius(1.1f);
-		else if (_yoffset > 0.0)
-			m_useCamera->scaleRadius(0.9f);
+		OrthographicCamera* cam = dynamic_cast<OrthographicCamera*>(m_useCamera);
+		if (cam)
+		{
+			cam->Zoom(_yoffset); // Use the zoom function of the orthographic camera
+		}
+		else
+		{
+			cout << "Camera is not of type OrthographicCamera" << endl;
+		}
+	}
+	else
+	{
+
 	}
 }
 

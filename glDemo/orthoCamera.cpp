@@ -98,3 +98,29 @@ void OrthographicCamera::move(const glm::vec3& direction, float _dt) {
 	calculateDerivedValues();
 	// Update the view matrix
 }
+
+void OrthographicCamera::Zoom(float scrollDelta) {
+    float zoomSpeed = 0.1f; // Adjust this to control zoom sensitivity
+
+    // Calculate the zoom scale
+    float zoomScale = 1.0f - scrollDelta * zoomSpeed;
+
+    // Prevent zoom from inverting the view or becoming too small
+    zoomScale = glm::clamp(zoomScale, 0.1f, 2.0f);
+
+    // Find the current bounds' center
+    float centerX = (m_left + m_right) / 2.0f;
+    float centerY = (m_bottom + m_top) / 2.0f;
+
+    // Adjust the bounds based on the zoom scale
+    float newWidth = (m_right - m_left) * zoomScale;
+    float newHeight = (m_top - m_bottom) * zoomScale;
+
+    m_left = centerX - newWidth / 2.0f;
+    m_right = centerX + newWidth / 2.0f;
+    m_bottom = centerY - newHeight / 2.0f;
+    m_top = centerY + newHeight / 2.0f;
+
+    // Recalculate the projection matrix
+    calculateDerivedValues();
+}

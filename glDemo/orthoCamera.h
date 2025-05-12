@@ -19,7 +19,7 @@ public:
 
     // Movement controls
     void move(const glm::vec3& direction, float speed); // Move the camera in a specific direction
- 
+    void Zoom(float scrollDelta);
 
 protected:
     // Orthographic bounds
