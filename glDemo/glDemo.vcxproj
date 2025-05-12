@@ -208,14 +208,16 @@
     <Text Include="manifest.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Shaders\allLights.frag" />
+    <None Include="Assets\Shaders\allLights.vert" />
     <None Include="Assets\Shaders\flatColour.frag" />
     <None Include="Assets\Shaders\flatColour.vert" />
+    <None Include="Assets\Shaders\point.frag" />
+    <None Include="Assets\Shaders\point.vert" />
     <None Include="Assets\Shaders\texture-directional.frag" />
     <None Include="Assets\Shaders\texture-directional.vert" />
     <None Include="Assets\Shaders\waveMotion.frag" />
     <None Include="Assets\Shaders\waveMotion.vert" />
-    <None Include="point.frag" />
-    <None Include="point.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

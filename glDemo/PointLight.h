@@ -1,19 +1,26 @@
 #pragma once
+
+#include "core.h"
 #include "Light.h"
+#include <vector>
+#include <string>
 
 class PointLight : public Light
 {
 public:
     PointLight();
-    virtual ~PointLight();
+    ~PointLight();
 
-    // Load point light data from a file
-    virtual void Load(ifstream& _file) override;
+    void Load(std::ifstream& _file) override;
+    void SetRenderValues(unsigned int _prog, int index);
 
-    // Set shader uniform values for the point light
-    virtual void SetRenderValues(unsigned int _prog) override;
+    // Static methods for managing multiple lights
+    static void AddLight(const PointLight& light);
+    static void RemoveLight(const std::string& name);
+    static void SetAllRenderValues(unsigned int _prog);
 
-protected:
+private:
+    glm::vec3 m_attenuation;
 
-    vec3 m_attenuation;  // Attenuation factors (constant, linear, quadratic)
+    static std::vector<PointLight> s_pointLights; // Container for all PointLight instances
 };

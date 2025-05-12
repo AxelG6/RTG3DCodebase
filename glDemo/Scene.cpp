@@ -6,6 +6,7 @@
 #include "FPCamera.h"
 #include "LightFactory.h"
 #include "Light.h"
+#include "PointLight.h"
 #include "ModelFactory.h"
 #include "model.h"
 #include "helper.h"
@@ -156,12 +157,18 @@ void Scene::Render()
 			GLuint SP = (*it)->GetShaderProg();
 
 			GLint timeLocation = glGetUniformLocation(SP, "time");
+			GLint numPointLightsLocation = glGetUniformLocation(SP, "numPointLights");
+			int activePointLights = 2;
+			
 			float currentTime = (float)glfwGetTime(); // or use SDL_GetTicks() / 1000.0f for SDL
+			
+
 			glUseProgram(SP);
 			glUniform1f(timeLocation, currentTime);
-			
+			glUniform1i(numPointLightsLocation, activePointLights);
 			//set up for uniform shader values for current camera
 			m_useCamera->SetRenderValues(SP);
+		
 			SetShaderUniforms(SP);
 			
 			//loop through setting up uniform shader values for anything else
@@ -182,10 +189,20 @@ void Scene::SetShaderUniforms(GLuint _shaderprog)
 {
 	//everything needs to know about all the lights
 	for (list<Light*>::iterator it = m_Lights.begin(); it != m_Lights.end(); it++)
-	{
-		(*it)->SetRenderValues(_shaderprog);
+	{	
+		if ((*it)->GetType() == "POINT")
+		{
+			PointLight* pointLight = dynamic_cast<PointLight*>(*it);
+			if (pointLight)
+			{
+				pointLight->SetAllRenderValues(_shaderprog);// Pass the index of the light
+			}
+		}
+		else 
+		{
+			(*it)->SetRenderValues(_shaderprog);
+		}
 	}
-
 }
 
 void Scene::Load(ifstream& _file)

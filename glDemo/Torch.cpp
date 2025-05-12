@@ -33,7 +33,7 @@ void Torch::Render()
 {
     for (const auto& loc : location1) {
         m_worldMatrix = glm::translate(mat4(1.0), loc);
-        m_worldMatrix = glm::scale(m_worldMatrix, glm::vec3(0.1, 0.1, 0.1));
+        m_worldMatrix = glm::scale(m_worldMatrix, glm::vec3(0.5, 0.5, 0.5));
         ExampleGO::PreRender();
         ExampleGO::Render();
     }
