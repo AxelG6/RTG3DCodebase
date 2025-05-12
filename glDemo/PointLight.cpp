@@ -14,42 +14,21 @@ PointLight::~PointLight()
 {
 }
 
-void PointLight::AddLight(const vec3& position, const vec3& attenuation) {
-    PointLightData newLight = { position, attenuation };
-    m_lights.push_back(newLight);
+void PointLight::Load(ifstream& _file)
+{
+    Light::Load(_file);
+    
+    StringHelp::Float3(_file, "ATTENUATION", m_attenuation.x, m_attenuation.y, m_attenuation.z);
 }
-
-void PointLight::Load(ifstream& _file) {
-    // Load multiple lights from the file if needed
-    // Example: You can read the number of lights and their properties
-    int numLights=2;
-    for (int i = 0; i < numLights; ++i) {
-        Light::Load(_file);
-        vec3 attenuation;
-        StringHelp::Float3(_file, "ATTENUATION", attenuation.x, attenuation.y, attenuation.z);
-        AddLight(m_pos, attenuation);
-        m_pos = glm::vec3(i * 1.0f, 0.0f, 1.0f);
-    }
-}
-
 
 void PointLight::SetRenderValues(unsigned int _prog)
 {
     // Set the basic light data
-    for (size_t i = 0; i < m_lights.size(); ++i) {
-        std::string lightName = "POINT" + std::to_string(i);
+    Light::SetRenderValues(_prog);
 
-        GLint loc;
+    GLint loc;
+    string attenuationString = m_name + "Atten"; // Attenuation uniform name
 
-        // Set position uniform
-        std::string positionString = lightName + "Pos";
-        if (Helper::SetUniformLocation(_prog, positionString.c_str(), &loc))
-            glUniform3fv(loc, 1, glm::value_ptr(m_lights[i].m_pos));
-
-        // Set attenuation uniform
-        std::string attenuationString = lightName + "Atten";
-        if (Helper::SetUniformLocation(_prog, attenuationString.c_str(), &loc))
-            glUniform3fv(loc, 1, glm::value_ptr(m_lights[i].m_attenuation));
-    }
-    
+    if (Helper::SetUniformLocation(_prog, attenuationString.c_str(), &loc))
+        glUniform3fv(loc, 1, glm::value_ptr(m_attenuation));
 }

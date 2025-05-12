@@ -18,6 +18,7 @@ void Light::Load(ifstream& _file)
 	StringHelp::Float3(_file, "POS", m_pos.x, m_pos.y, m_pos.z);
 	StringHelp::Float3(_file, "COL", m_col.x, m_col.y, m_col.z);
 	StringHelp::Float3(_file, "AMB", m_amb.x, m_amb.y, m_amb.z);
+
 }
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -45,5 +46,3 @@ void Light::SetRenderValues(unsigned int _prog)
 	if (Helper::SetUniformLocation(_prog, ambString.c_str(), &loc))
 		glUniform3fv(loc, 1, glm::value_ptr(GetAmb()));
 }
-
-
