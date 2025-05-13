@@ -182,7 +182,46 @@ void Scene::Render()
 			(*it)->Render();
 		}
 	}
-	//TODO: now do the same for RP_TRANSPARENT here
+	for (list<GameObject*>::iterator it = m_GameObjects.begin(); it != m_GameObjects.end(); it++)
+	{
+		if ((*it)->GetRP() & RP_TRANSPARENT)
+		{
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			glDepthMask(GL_FALSE);
+			//set shader program using
+			GLuint SP = (*it)->GetShaderProg();
+
+			GLint timeLocation = glGetUniformLocation(SP, "time");
+			GLint numPointLightsLocation = glGetUniformLocation(SP, "numPointLights");
+			GLint numSpotLightsLocation = glGetUniformLocation(SP, "numSpotLights");
+
+			GLint alphaLocation = glGetUniformLocation(SP, "alphaValue");
+			glUseProgram(SP);
+			glUniform1f(alphaLocation, 0.5f);
+			int activePointLights = 2;
+
+			int activeSpotLights = 1;
+
+			float currentTime = (float)glfwGetTime(); // or use SDL_GetTicks() / 1000.0f for SDL
+
+
+			glUseProgram(SP);
+			glUniform1f(timeLocation, currentTime);
+			glUniform1i(numPointLightsLocation, activePointLights);
+			glUniform1i(numSpotLightsLocation, activeSpotLights);
+			//set up for uniform shader values for current camera
+			m_useCamera->SetRenderValues(SP);
+			
+			SetShaderUniforms(SP);
+			//set any uniform shader values for the actual model
+			(*it)->PreRender();
+			//actually render the GameObject
+			(*it)->Render();
+			glDepthMask(GL_TRUE); // Re-enable depth writing
+			glDisable(GL_BLEND);
+		}
+	}
 }
 
 void Scene::SetShaderUniforms(GLuint _shaderprog)

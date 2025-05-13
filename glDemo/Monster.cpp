@@ -6,6 +6,7 @@
 Monster::Monster()
 {
 	m_type = "MONSTER";
+	m_RP = RP_TRANSPARENT; // Set the render pass for the monster
 }
 
 void Monster::Load(std::ifstream& _file) {
@@ -16,12 +17,12 @@ void Monster::Load(std::ifstream& _file) {
     StringHelp::Float(_file, "WANDER_RADIUS", m_WanderRadius);
     StringHelp::Float(_file, "SPEED", m_Speed);
     StringHelp::Float(_file, "CHANGE_INTERVAL", m_ChangeInterval);
+    
 }
 
 void Monster::Init(Scene* _scene) {
     // Call the parent class's Init to initialize common attributes
-    ExampleGO::Init(_scene);
-
+    ExampleGO::Init(_scene); // Set the render pass for the monster;
     // Initialize additional attributes specific to MonsterGO
     m_Direction = glm::normalize(glm::vec3(rand() % 3 - 1, 0.0f, rand() % 3 - 1)); // Random initial direction
 }

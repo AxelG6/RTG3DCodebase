@@ -27,6 +27,10 @@ uniform int numSpotLights;
 
 // Sampler for the surface texture
 uniform sampler2D sampleTexture;
+uniform float alphaValue;
+
+// Alpha threshold for transparency (optional, can be adjusted)
+uniform float alphaThreshold = 0.1;
 
 in SimplePacket {
     vec3 surfaceWorldPos;  // Fragment position in world space
@@ -40,8 +44,13 @@ void main(void) {
     // Normalize the surface normal
     vec3 N = normalize(inputFragment.surfaceNormal);
 
-    // Sample the surface color from the texture
+    // Sample the surface color from the texture, including its alpha channel
     vec4 surfaceColour = texture(sampleTexture, inputFragment.texCoord);
+
+    // Discard fragments with alpha below the threshold to avoid rendering them
+    if (surfaceColour.a < alphaThreshold) {
+        discard;
+    }
 
     // --- Point Lights Contributions ---
     vec3 finalColourPoint = vec3(0.0);
@@ -92,6 +101,6 @@ void main(void) {
     // Combine all light contributions
     vec3 finalColour = finalColourPoint + finalColourDirectional + finalColourSpot;
 
-    // Output the final fragment color
-    fragColour = vec4(finalColour, 1.0);
+    // Output the final fragment color, preserving the alpha value from the texture
+    fragColour = vec4(finalColour, alphaValue);
 }

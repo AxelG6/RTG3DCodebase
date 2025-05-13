@@ -20,4 +20,5 @@ private:
     float m_WanderRadius;   // Radius within which the monster can wander
     float m_Timer;          // Timer for changing direction
     float m_ChangeInterval; // Time interval to change direction
+
 };
