@@ -148,11 +148,9 @@ Shader* Scene::GetShader(string _shaderName)
 void Scene::Render()
 {
 
-	//TODO: Set up for the Opaque Render Pass will go here
-	//check out the example stuff back in main.cpp to see what needs setting up here
 	for (list<GameObject*>::iterator it = m_GameObjects.begin(); it != m_GameObjects.end(); it++)
 	{
-		if ((*it)->GetRP() & RP_OPAQUE)// TODO: note the bit-wise operation. Why?
+		if ((*it)->GetRP() & RP_OPAQUE)
 		{
 			//set shader program using
 			GLuint SP = (*it)->GetShaderProg();
@@ -160,13 +158,13 @@ void Scene::Render()
 			GLint timeLocation = glGetUniformLocation(SP, "time");
 			GLint numPointLightsLocation = glGetUniformLocation(SP, "numPointLights");
 			GLint numSpotLightsLocation = glGetUniformLocation(SP, "numSpotLights");
-			
+
 			int activePointLights = 2;
-			
+
 			int activeSpotLights = 1;
 
 			float currentTime = (float)glfwGetTime(); // or use SDL_GetTicks() / 1000.0f for SDL
-			
+
 
 			glUseProgram(SP);
 			glUniform1f(timeLocation, currentTime);
@@ -174,11 +172,8 @@ void Scene::Render()
 			glUniform1i(numSpotLightsLocation, activeSpotLights);
 			//set up for uniform shader values for current camera
 			m_useCamera->SetRenderValues(SP);
-		
+
 			SetShaderUniforms(SP);
-			
-			//loop through setting up uniform shader values for anything else
-			
 
 			//set any uniform shader values for the actual model
 			(*it)->PreRender();
@@ -187,7 +182,6 @@ void Scene::Render()
 			(*it)->Render();
 		}
 	}
-
 	//TODO: now do the same for RP_TRANSPARENT here
 }
 

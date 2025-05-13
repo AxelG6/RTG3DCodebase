@@ -27,7 +27,6 @@ std::vector<vec3> location;
 Wall::Wall()
 {
 	m_type = "WALL";
-	
 }
 
 void Wall::Load(ifstream& _file)

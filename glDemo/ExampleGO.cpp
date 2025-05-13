@@ -19,7 +19,6 @@ void ExampleGO::Load(ifstream& _file)
 	StringHelp::String(_file, "MODEL", m_ModelName);
 	StringHelp::String(_file, "TEXTURE", m_TexName);
 	StringHelp::String(_file, "SHADER", m_ShaderName);
-
 }
 
 void ExampleGO::Tick(float _dt)
@@ -38,9 +37,7 @@ void ExampleGO::PreRender()
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 
-	//TODO: this does sort of replicate stuff in the AIMesh class, could we make them more compatible.
 
-	//TODO: NORMAL MAPS!
 }
 
 void ExampleGO::Render()

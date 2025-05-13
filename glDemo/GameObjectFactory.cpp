@@ -3,6 +3,7 @@
 #include "ExampleGO.h"
 #include "Wall.h"
 #include "Torch.h"
+#include "Monster.h"
 #include <assert.h>
 
 using std::string;
@@ -26,6 +27,11 @@ GameObject* GameObjectFactory::makeNewGO(string _type)
 	{
 		return new Torch();
 	}
+	else if (_type == "MONSTER")
+	{
+		return new Monster();
+	}
+
 	else
 	{
 		printf("UNKNOWN GAME OBJECT TYPE: %s \n", _type.c_str());

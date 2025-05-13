@@ -3,38 +3,42 @@
 uniform mat4 modelMatrix;
 uniform mat4 viewMatrix;
 uniform mat4 projMatrix;
-uniform float time; // new: time variable for wave animation
+uniform float time; // time variable for wave animation
 
-layout (location=0) in vec3 vertexPos;
-layout (location=2) in vec3 vertexTexCoord;
-layout (location=3) in vec3 vertexNormal;
+layout(location = 0) in vec3 vertexPos;      // Vertex position
+layout(location = 2) in vec2 vertexTexCoord; // Vertex texture coordinates
+layout(location = 3) in vec3 vertexNormal; 
 
 out SimplePacket {
-  vec3 surfaceWorldPos;
-  vec3 surfaceNormal;
-  vec2 texCoord;
+    vec3 surfaceWorldPos;
+    vec3 surfaceNormal;
+    vec2 texCoord;
 } outputVertex;
 
 void main(void) {
+    outputVertex.texCoord = vertexTexCoord;
 
-  outputVertex.texCoord = vertexTexCoord.st;
+    // Wave parameters
+    float amplitude = 0.2;
+    float frequency = 2.0;
+    float speed = 2.0;
 
-  // Parameters for wave
-  float amplitude = 0.2;     // height of the wave
-  float frequency = 2.0;     // number of waves
-  float speed = 2.0;         // how fast the wave moves
+    // Deform vertex position with wave
+    vec3 animatedPos = vertexPos;
+    animatedPos.y += sin(vertexPos.x * frequency + time * speed) * amplitude;
 
-  // Apply wave to Y-axis based on X and time
-  vec3 animatedPos = vertexPos;
-  animatedPos.y += sin(vertexPos.x * frequency + time * speed) * amplitude;
+    // Approximate the normal using partial derivatives
+    vec3 tangentX = vec3(1.0, cos(vertexPos.x * frequency + time * speed) * amplitude * frequency, 0.0);
+    vec3 tangentZ = vec3(0.0, cos(vertexPos.x * frequency + time * speed) * amplitude * frequency, 1.0);
+    vec3 updatedNormal = normalize(cross(tangentZ, tangentX)); // Recalculate normal
 
-  // Transform normal with the inverse-transpose of the model matrix
-  outputVertex.surfaceNormal = (transpose(inverse(modelMatrix)) * vec4(vertexNormal, 0.0)).xyz;
+    // Transform updated normal to world space
+    outputVertex.surfaceNormal = (transpose(inverse(modelMatrix)) * vec4(updatedNormal, 0.0)).xyz;
 
-  // Convert to world coordinates
-  vec4 worldCoord = modelMatrix * vec4(animatedPos, 1.0);
-  outputVertex.surfaceWorldPos = worldCoord.xyz;
+    // Transform position to world space
+    vec4 worldCoord = modelMatrix * vec4(animatedPos, 1.0);
+    outputVertex.surfaceWorldPos = worldCoord.xyz;
 
-  // Final position in clip space
-  gl_Position = projMatrix * viewMatrix * worldCoord;
+    // Final position in clip space
+    gl_Position = projMatrix * viewMatrix * worldCoord;
 }

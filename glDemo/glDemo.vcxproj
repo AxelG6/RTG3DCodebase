@@ -149,6 +149,7 @@
     <ClInclude Include="DirectionLight.h" />
     <ClInclude Include="ExampleGO.h" />
     <ClInclude Include="FreeImage\FreeImage.h" />
+    <ClInclude Include="Monster.h" />
     <ClInclude Include="orthoCamera.h" />
     <ClInclude Include="Plane.h" />
     <ClInclude Include="PointLight.h" />
@@ -185,6 +186,7 @@
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="DirectionLight.cpp" />
     <ClCompile Include="ExampleGO.cpp" />
+    <ClCompile Include="Monster.cpp" />
     <ClCompile Include="orthoCamera.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="PointLight.cpp" />
