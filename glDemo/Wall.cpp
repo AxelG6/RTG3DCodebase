@@ -1,6 +1,4 @@
 #include "Wall.h"
-#include "ExampleGO.h"
-#include "stringHelp.h"
 
 const int WIDHT = 15;
 const int labyrinth[WIDHT][WIDHT] = {

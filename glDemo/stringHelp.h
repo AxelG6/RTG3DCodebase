@@ -30,4 +30,5 @@ public:
 		_file >> dummy >> _out; _file.ignore(255, '\n');
 		cout << _message << " : " << _out << endl;
 	}
+	
 };

@@ -6,7 +6,6 @@ class GameObject;
 class GameObjectFactory
 {
 public:
-
 	static GameObject* makeNewGO(std::string _type);
 };
 

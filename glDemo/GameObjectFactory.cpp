@@ -19,10 +19,6 @@ GameObject* GameObjectFactory::makeNewGO(string _type)
 	{
 		return new ExampleGO();
 	}
-	else if (_type == "WALL")
-	{
-		return new Wall();
-	}
 	else if (_type == "TORCH")
 	{
 		return new Torch();
@@ -30,6 +26,10 @@ GameObject* GameObjectFactory::makeNewGO(string _type)
 	else if (_type == "MONSTER")
 	{
 		return new Monster();
+	}
+	else if (_type == "WALL")
+	{
+		return new Wall();
 	}
 
 	else

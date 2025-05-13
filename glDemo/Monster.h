@@ -14,11 +14,11 @@ public:
 
 private:
     void Wander(float _dt); // Wandering behavior
-
+	void Render() override;
     glm::vec3 m_Direction;  // Direction of movement
     float m_Speed;          // Speed of the monster
     float m_WanderRadius;   // Radius within which the monster can wander
     float m_Timer;          // Timer for changing direction
     float m_ChangeInterval; // Time interval to change direction
-
+    float RP;
 };

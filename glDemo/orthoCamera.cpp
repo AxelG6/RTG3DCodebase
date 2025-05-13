@@ -8,7 +8,7 @@
 // Constructor
 /////////////////////////////////////////////////////////////////////////////////////
 OrthographicCamera::OrthographicCamera()
-    : m_left(-1.0f), m_right(1.0f), m_bottom(-1.0f), m_top(1.0f) {
+    : m_left(-5.0f), m_right(5.0f), m_bottom(-5.0f), m_top(5.0f) {
     m_type = "ORTHOGRAPHIC_CAMERA";
 }
 

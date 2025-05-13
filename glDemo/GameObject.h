@@ -36,7 +36,7 @@ public:
 
 	//this GameObject should be drawn in THIS render pass
 	RenderPass GetRP() { return m_RP; }
-
+	void SetRP(RenderPass _rp) { m_RP = _rp; }
 protected:
 
 	string m_name;
