@@ -4,6 +4,7 @@
 #include "Wall.h"
 #include "Torch.h"
 #include "Monster.h"
+#include "Vortex.h"
 #include <assert.h>
 
 using std::string;
@@ -31,8 +32,10 @@ GameObject* GameObjectFactory::makeNewGO(string _type)
 	{
 		return new Wall();
 	}
-
-	else
+	else if (_type == "VORTEX")
+	{
+		return new Vortex();
+	}
 	{
 		printf("UNKNOWN GAME OBJECT TYPE: %s \n", _type.c_str());
 		assert(0);

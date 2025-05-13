@@ -22,9 +22,45 @@ Scene::Scene()
 
 Scene::~Scene()
 {
-	//TODO: We are being really naught and not deleting everything as we finish
-	//what shoudl really go here and in similar places throughout the code base?
-}
+		// Delete all cameras
+		for (Camera* camera : m_Cameras) {
+			delete camera;
+		}
+		m_Cameras.clear();
+
+		// Delete all lights
+		for (Light* light : m_Lights) {
+			delete light;
+		}
+		m_Lights.clear();
+
+		// Delete all game objects
+		for (GameObject* gameObject : m_GameObjects) {
+			delete gameObject;
+		}
+		m_GameObjects.clear();
+
+		// Delete all textures
+		for (Texture* texture : m_Textures) {
+			delete texture;
+		}
+		m_Textures.clear();
+
+		// Delete all models
+		for (Model* model : m_Models) {
+			delete model;
+		}
+		m_Models.clear();
+
+		// Delete all shaders
+		for (Shader* shader : m_Shaders) {
+			delete shader;
+		}
+		m_Shaders.clear();
+
+		// Reset the active camera
+		m_useCamera = nullptr;
+	}
 
 //tick all my Game Objects, lights and cameras
 void Scene::Update(float _dt,float aspectRatio)
@@ -159,9 +195,10 @@ void Scene::Render()
 			GLint numPointLightsLocation = glGetUniformLocation(SP, "numPointLights");
 			GLint numSpotLightsLocation = glGetUniformLocation(SP, "numSpotLights");
 
-			int activePointLights = 2;
+			int activePointLights=8;
 
-			int activeSpotLights = 1;
+			int activeSpotLights=1;
+
 
 			float currentTime = (float)glfwGetTime(); // or use SDL_GetTicks() / 1000.0f for SDL
 
@@ -422,7 +459,7 @@ void Scene::Init()
 	}
 }
 //change name
-void Scene::Input()
+void Scene::SwitchCamera()
 {
 	m_useCameraIndex++;
 	m_useCameraIndex = m_useCameraIndex % m_numCameras;

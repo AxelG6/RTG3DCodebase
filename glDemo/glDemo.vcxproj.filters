@@ -138,6 +138,12 @@
     <ClInclude Include="Monster.h">
       <Filter>Scene Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Vortex.h">
+      <Filter>Scene Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Scene Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -234,6 +240,12 @@
       <Filter>Scene Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
+      <Filter>Scene Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vortex.cpp">
+      <Filter>Scene Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
       <Filter>Scene Source Files</Filter>
     </ClCompile>
   </ItemGroup>

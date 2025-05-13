@@ -20,7 +20,6 @@ public:
 	virtual void Load(ifstream& _file);
 
 	//update the GameObject
-	//TODO: possibly pass keyboard / mouse stuff down here for player controls?
 	virtual void Tick(float _dt);
 
 	virtual void PreRender();//set up any shader values needed for this object

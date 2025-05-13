@@ -48,8 +48,8 @@ void mouseMoveHandler(GLFWwindow* _window, double _xpos, double _ypos);
 void mouseButtonHandler(GLFWwindow* _window, int _button, int _action, int _mods);
 void mouseScrollHandler(GLFWwindow* _window, double _xoffset, double _yoffset);
 void mouseEnterHandler(GLFWwindow* _window, int _entered);
-
 void input(); // Function to handle input events
+
 int main()
 {
 	//
@@ -199,7 +199,6 @@ void resizeWindow(GLFWwindow* _window, int _width, int _height)
 	windowHeight = _height;
 }
 
-
 // Function to call to handle keyboard input
 void keyboardHandler(GLFWwindow* _window, int _key, int _scancode, int _action, int _mods)
 {
@@ -215,7 +214,7 @@ void keyboardHandler(GLFWwindow* _window, int _key, int _scancode, int _action, 
 			break;
 
 		case GLFW_KEY_SPACE:
-			g_Scene->Input();
+			g_Scene->SwitchCamera();
 			break;
 		case GLFW_KEY_A:
 			aDown = true;
@@ -261,7 +260,6 @@ void keyboardHandler(GLFWwindow* _window, int _key, int _scancode, int _action, 
 		}
 	}
 }
-
 
 void mouseMoveHandler(GLFWwindow* _window, double _xpos, double _ypos) 
 {

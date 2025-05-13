@@ -14,12 +14,11 @@ class Model;
 class Texture;
 class Shader;
 
-//Note quite a proper scene graph but this contains data structures for all of our bits and pieces we want to draw
 class Scene
 {
 public:
 	Scene();
-	~Scene();
+	virtual ~Scene();
 
 	//tick all GOs
 	void Update(float _dt, float aspectRatio);
@@ -46,7 +45,7 @@ public:
 
 	//initialise links between items in the scene
 	void Init();
-	void Input();
+	void SwitchCamera();
 
 	void mouseMoveHandlerC(double _xpos, double _ypos);
 	void mouseScrollHandlerC(double _xoffset, double _yoffset);
@@ -75,6 +74,6 @@ protected:
 
 	Camera* m_useCamera = nullptr; //current main camera in use
 	int m_useCameraIndex = 0;
-	//TODO: pass down the same keyboard input from main so that we skip through all the cameras
+	
 };
 

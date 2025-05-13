@@ -1,7 +1,7 @@
 #version 450 core
 
-#define MAX_POINT_LIGHTS 10
-#define MAX_SPOT_LIGHTS 10
+#define MAX_POINT_LIGHTS 50
+#define MAX_SPOT_LIGHTS 50
 
 // Directional light model
 uniform vec3 DIRDir;       // Direction of the directional light

@@ -149,6 +149,7 @@
     <ClInclude Include="DirectionLight.h" />
     <ClInclude Include="ExampleGO.h" />
     <ClInclude Include="FreeImage\FreeImage.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="orthoCamera.h" />
     <ClInclude Include="Plane.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureLoader.h" />
     <ClInclude Include="Torch.h" />
+    <ClInclude Include="Vortex.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AIMesh.cpp" />
@@ -186,6 +188,7 @@
     <ClCompile Include="Cube.cpp" />
     <ClCompile Include="DirectionLight.cpp" />
     <ClCompile Include="ExampleGO.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="orthoCamera.cpp" />
     <ClCompile Include="Plane.cpp" />
@@ -205,6 +208,7 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureLoader.cpp" />
     <ClCompile Include="Torch.cpp" />
+    <ClCompile Include="Vortex.cpp" />
     <ClCompile Include="Wall.cpp" />
     <ClCompile Include="Wall.h" />
   </ItemGroup>
