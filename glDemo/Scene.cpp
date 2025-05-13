@@ -7,6 +7,7 @@
 #include "LightFactory.h"
 #include "Light.h"
 #include "PointLight.h"
+#include "SpotLight.h"
 #include "ModelFactory.h"
 #include "model.h"
 #include "helper.h"
@@ -158,14 +159,19 @@ void Scene::Render()
 
 			GLint timeLocation = glGetUniformLocation(SP, "time");
 			GLint numPointLightsLocation = glGetUniformLocation(SP, "numPointLights");
+			GLint numSpotLightsLocation = glGetUniformLocation(SP, "numSpotLights");
+			
 			int activePointLights = 2;
 			
+			int activeSpotLights = 1;
+
 			float currentTime = (float)glfwGetTime(); // or use SDL_GetTicks() / 1000.0f for SDL
 			
 
 			glUseProgram(SP);
 			glUniform1f(timeLocation, currentTime);
 			glUniform1i(numPointLightsLocation, activePointLights);
+			glUniform1i(numSpotLightsLocation, activeSpotLights);
 			//set up for uniform shader values for current camera
 			m_useCamera->SetRenderValues(SP);
 		
@@ -197,6 +203,18 @@ void Scene::SetShaderUniforms(GLuint _shaderprog)
 			{
 				pointLight->SetAllRenderValues(_shaderprog);// Pass the index of the light
 			}
+		}
+		else if ((*it)->GetType() == "SPOT")
+		{
+			SpotLight* spotLight = dynamic_cast<SpotLight*>(*it);
+			if (spotLight)
+			{
+				spotLight->SetAllRenderValues(_shaderprog);// Pass the index of the light
+			}
+		}
+		else if ((*it)->GetType() == "DIRECTION")
+		{
+			(*it)->SetRenderValues(_shaderprog);
 		}
 		else 
 		{

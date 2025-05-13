@@ -1,6 +1,8 @@
 #include "Torch.h"
 #include "ExampleGO.h"
 #include "stringHelp.h"
+#include "PointLight.h"
+
 
 const int WIDHT = 10;
 const int labyrinth[WIDHT][WIDHT] = {
@@ -20,13 +22,14 @@ std::vector<vec3> location1;
 
 Torch::Torch()
 {
-    m_type = "CHANDELIER";
+    m_type = "TORCH";
 
 }
 
 void Torch::Load(ifstream& _file)
 {
     ExampleGO::Load(_file);
+
 }
 
 void Torch::Render()

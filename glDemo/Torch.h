@@ -9,6 +9,7 @@ public:
 	void Load(ifstream& file);
 	void Render();
 	void Init(Scene* _scene);
-private:
 
+private:
+	
 };
