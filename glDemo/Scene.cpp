@@ -207,6 +207,7 @@ void Scene::Render()
 			glUniform1f(timeLocation, currentTime);
 			glUniform1i(numPointLightsLocation, activePointLights);
 			glUniform1i(numSpotLightsLocation, activeSpotLights);
+
 			//set up for uniform shader values for current camera
 			m_useCamera->SetRenderValues(SP);
 
@@ -230,12 +231,15 @@ void Scene::Render()
 			GLuint SP = (*it)->GetShaderProg();
 
 			GLint timeLocation = glGetUniformLocation(SP, "time");
+
 			GLint numPointLightsLocation = glGetUniformLocation(SP, "numPointLights");
 			GLint numSpotLightsLocation = glGetUniformLocation(SP, "numSpotLights");
 
 			GLint alphaLocation = glGetUniformLocation(SP, "alphaValue");
+
 			glUseProgram(SP);
 			glUniform1f(alphaLocation, 0.5f);
+
 			int activePointLights = 2;
 
 			int activeSpotLights = 1;

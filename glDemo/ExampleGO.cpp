@@ -37,7 +37,6 @@ void ExampleGO::PreRender()
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, m_texture);
 
-	
 }
 
 void ExampleGO::Render()

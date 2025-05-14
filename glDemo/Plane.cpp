@@ -77,8 +77,8 @@ void Plane::PlaneIndex(int div)
 			procIndexArray.push_back(index + 1);//1
 			procIndexArray.push_back(index);//0
 			
-			procIndexArray.push_back(index + 1);
-			procIndexArray.push_back(index + (div + 1));
+			procIndexArray.push_back(index + 1);//1
+			procIndexArray.push_back(index + (div + 1));//2
 			procIndexArray.push_back(index + (div + 1) + 1);//3
 			
 			

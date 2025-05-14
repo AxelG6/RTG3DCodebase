@@ -218,6 +218,7 @@
   <ItemGroup>
     <None Include="Assets\Shaders\allLights.frag" />
     <None Include="Assets\Shaders\allLights.vert" />
+    <None Include="Assets\Shaders\ChangeColour.frag" />
     <None Include="Assets\Shaders\vortex.frag" />
     <None Include="Assets\Shaders\vortex.vert" />
     <None Include="Assets\Shaders\point.frag" />

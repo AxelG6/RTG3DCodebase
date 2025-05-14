@@ -285,5 +285,8 @@
     <None Include="Assets\Shaders\point.vert">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="Assets\Shaders\ChangeColour.frag">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

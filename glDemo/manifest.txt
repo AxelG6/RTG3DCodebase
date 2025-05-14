@@ -210,7 +210,7 @@ FILE: Assets\\alien-dungeon-monster\\texture_diffuse.png
 
 
 
-SHADERS 7
+SHADERS 8
 {
 NAME: FLAT
 VERTFILE: Assets\\Shaders\\flatColour.vert
@@ -245,6 +245,11 @@ FRAGFILE: Assets\\Shaders\\allLights.frag
 NAME: VORTEX
 VERTFILE: Assets\\Shaders\\allLights.vert
 FRAGFILE: Assets\\Shaders\\vortex.frag
+}
+{
+NAME: COLORCHANGE
+VERTFILE:Assets\\Shaders\\allLights.vert
+FRAGFILE:Assets\\Shaders\\ChangeColour.frag
 }
 
 GAMEOBJECTS 11
@@ -392,7 +397,7 @@ SCALE: 0.009 0.009 0.009
 ROTINC: 0.0 0.0 0.0
 MODEL: EGG
 TEXTURE: EGG
-SHADER: ALLLIGHTS
+SHADER: COLOURCHANGE
 NORMAL: BEHOLDER_NORM
 WANDER_RADIUS: 0.0
 SPEED: 0.0

@@ -163,8 +163,6 @@ void renderScene()
 	// Clear the rendering window
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-#// Render principle axes - no modelling transforms so just use cameraTransform
-
 		g_Scene->Render();
 }
 
@@ -174,7 +172,7 @@ void updateScene()
 {
 	float tDelta = 0.0f;
 	
-	input();
+	input(); //player function to move the cameras around
 
 	if (g_gameClock) {
 
