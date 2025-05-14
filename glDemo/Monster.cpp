@@ -57,13 +57,17 @@ void Monster::Wander(float _dt) {
     // Update position based on direction and speed
     glm::vec3 newPosition = m_pos + m_Direction * m_Speed * _dt;
 
-    // Keep the monster within the wandering radius
-    if (glm::length(newPosition) > m_WanderRadius) {
-        m_Direction = -m_Direction; // Reverse direction if out of bounds
+    // Keep the monster within the wandering radius and boundary [0, 15] for x and z
+    if (glm::length(newPosition) > m_WanderRadius ||
+        newPosition.x < 1.0f || newPosition.x > 14.0f ||
+        newPosition.z < 1.0f || newPosition.z > 14.0f) {
+
+        // Reverse direction if out of bounds
+        m_Direction = -m_Direction;
     }
-    else 
-    {
-		m_pos = newPosition; // Update position
+    else {
+        // Update position
+        m_pos = newPosition;
     }
 }
 
