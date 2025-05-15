@@ -8,19 +8,21 @@ FirstPersonCamera::FirstPersonCamera()
 }
 
 // Initialize the camera
-void FirstPersonCamera::Init(float _w, float _h, Scene* _scene) {
+void FirstPersonCamera::Init(float _w, float _h, Scene* _scene) 
+{
     Camera::Init(_w, _h, _scene);
     rotateCamera(0.0f, 0.0f); // Initialize m_lookAt based on m_theta and m_phi
 }
 
 // Update the camera every frame
-void FirstPersonCamera::Tick(float _dt, float aspectRatio) {
+void FirstPersonCamera::Tick(float _dt, float aspectRatio) 
+{
     Camera::Tick(_dt, aspectRatio);
-    //rotateCamera(0.0f, 0.0f); // Ensure m_lookAt is always updated
 }
 
-// Handle keyboard input, somehow foard and left work but on the wrong axis
-void FirstPersonCamera::ProcessKeyboardInput(const glm::vec3& direction, float _dt) {
+// Handle keyboard input, somehow foward and left work but on the wrong axis
+void FirstPersonCamera::ProcessKeyboardInput(const glm::vec3& direction, float _dt) 
+{
     float velocity = speed * _dt;
 
     // Calculate the forward direction (normalized vector)
@@ -29,7 +31,6 @@ void FirstPersonCamera::ProcessKeyboardInput(const glm::vec3& direction, float _
     // Calculate the right direction (normalized vector)
     glm::vec3 forward = glm::normalize(glm::cross(right, glm::vec3(0.0f, 1.0f, 0.0f)));
 
-    // Move along the direction provided
     if (direction.z > 0.0f) { 
         m_pos -= forward * velocity * direction.z;
     }
@@ -47,14 +48,14 @@ void FirstPersonCamera::ProcessKeyboardInput(const glm::vec3& direction, float _
     // Update the look-at point to move with the camera
     m_lookAt = m_pos + glm::normalize(m_lookAt - m_pos);
     m_pos.y=0.5f; // Keep the camera at a fixed height
+    
     // Debug output for position and look-at
-    std::cout << "Camera::ProcessKeyboardInput: m_pos = " << glm::to_string(m_pos) << std::endl;
-    std::cout << "Camera::ProcessKeyboardInput: m_lookAt = " << glm::to_string(m_lookAt) << std::endl;
+    //std::cout << "Camera::ProcessKeyboardInput: m_pos = " << glm::to_string(m_pos) << std::endl;
+    //std::cout << "Camera::ProcessKeyboardInput: m_lookAt = " << glm::to_string(m_lookAt) << std::endl;
 
     // Recalculate derived values like view matrix
     calculateDerivedValues();
 	rotateCamera(0.0f, 0.0f); // Update m_lookAt based on new position
-
 }
 
 // Handle mouse movement

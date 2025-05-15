@@ -101,6 +101,6 @@ void main(void) {
     // Combine all light contributions
     vec3 finalColour = finalColourPoint + finalColourDirectional + finalColourSpot;
 
-    // Output the final fragment color, preserving the alpha value from the texture
+    // Output the final fragment colour, preserving the alpha value from the texture
     fragColour = vec4(finalColour, alphaValue);
 }

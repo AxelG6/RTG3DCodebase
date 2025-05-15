@@ -86,6 +86,7 @@ float Camera::getPhi() {
 	return m_phi;
 }
 
+//not being used
 void Camera::rotateCamera(float _dTheta, float _dPhi) {
 
 	m_theta += _dTheta*0.1;

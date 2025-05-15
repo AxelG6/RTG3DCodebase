@@ -238,7 +238,7 @@ void Scene::Render()
 			GLint alphaLocation = glGetUniformLocation(SP, "alphaValue");
 
 			glUseProgram(SP);
-			glUniform1f(alphaLocation, 0.5f);
+			glUniform1f(alphaLocation, 0.5f); //Change the 0.5 with the alpha channel of the texture will give different level of transparency depending on the texture
 
 			int activePointLights = 2;
 
