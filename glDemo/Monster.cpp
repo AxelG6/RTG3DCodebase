@@ -74,6 +74,7 @@ void Monster::Wander(float _dt) {
 void Monster::Render() {
 	// Call the parent class's PreRender to set up shader values
 	ExampleGO::PreRender();
+
     if (m_normalMap) {
         glActiveTexture(GL_TEXTURE1); // Bind to texture unit 1
         glBindTexture(GL_TEXTURE_2D, m_normalMap);

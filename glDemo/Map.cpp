@@ -2,6 +2,11 @@
 
 const int WIDHT = 15;
 
+//0=EMPTY SPACE
+//1=WALL
+//2=PORTAL
+//3=TORCH
+
 const int labyrinth[WIDHT][WIDHT] = {
 	{1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1},//1
 	{1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1},//2

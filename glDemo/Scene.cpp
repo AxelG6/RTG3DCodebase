@@ -259,6 +259,7 @@ void Scene::Render()
 			(*it)->PreRender();
 			//actually render the GameObject
 			(*it)->Render();
+
 			glDepthMask(GL_TRUE); // Re-enable depth writing
 			glDisable(GL_BLEND);
 		}
